@@ -17,11 +17,13 @@ private:
     uInt pos_x;
     uInt pos_y;
 public:
-    Piece();
+    Piece(uInt pos_x, uInt pos_y, bool color);
 
-    std::vector<std::tuple<>> LegalMoves();
-    std::vector<std::tuple<>> LegalTakes();
+    std::vector<std::tuple<int,int>> LegalMoves();
+    std::vector<std::tuple<int,int>> LegalTakes();
     void Move();
+
+    std::tuple<int,int> GetPos();
 
 };
 
