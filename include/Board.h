@@ -18,7 +18,7 @@ using uInt = unsigned int;
 
 class Board{
 private:
-    std::unordered_map<std::tuple<int>,std::shared_ptr<Piece>> board_table;
+    std::vector<std::shared_ptr<Piece>> board_table;
     std::shared_ptr<Piece> currently_held_piece;
 public:
     std::shared_ptr<Piece> GetPiece();
@@ -28,7 +28,7 @@ public:
     uInt CheckForWin();
     void Castle();
     void UpdateTable();
-    const std::unordered_map<std::tuple<int>,std::shared_ptr<Piece>> ReturnAllPieces();
+    std::vector<std::shared_ptr<Piece>> ReturnAllPieces();
     void SetupBoardPieces();
     uInt CheckForCheck();
 

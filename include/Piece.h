@@ -23,6 +23,7 @@ public:
     std::vector<std::tuple<int,int>> LegalTakes();
     void Move();
 
+    bool GetColor();
     std::tuple<int,int> GetPos();
 
 };
