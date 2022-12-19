@@ -21,7 +21,7 @@ public:
 
     std::vector<std::tuple<int,int>> LegalMoves();
     std::vector<std::tuple<int,int>> LegalTakes();
-    void Move();
+    void Move(uInt pos_x, uInt pos_y);
 
     bool GetColor();
     std::tuple<int,int> GetPos();

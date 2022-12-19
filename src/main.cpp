@@ -12,20 +12,6 @@
 #define PIECE_WIDTH (WIDTH/8)
 
 
-class ColorPalette {
-public:
-    sf::Color black_tile;
-    sf::Color white_tile;
-    sf::Color white_piece;
-    sf::Color black_piece;
-
-    ColorPalette(sf::Color bt, sf::Color wt, sf::Color wp, sf::Color bp) {
-        black_tile = bt;
-        black_piece = bp;
-        white_tile = wt;
-        white_piece = wp;
-    }
-};
 
 
 void draw(const std::vector<std::shared_ptr<Piece>> &pieces, sf::RenderWindow &Window) {
@@ -65,30 +51,12 @@ void draw(const std::vector<std::shared_ptr<Piece>> &pieces, sf::RenderWindow &W
 int main() {
     int posx{0}, posy{0};
 
-    Board board;
-    board.SetupBoardPieces();
+    Game game;
+
+    game.GameLoop();
 
 
-    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML works!");
-    while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
 
-            else if(event.type == sf::Event::MouseButtonReleased){
-                posx = event.mouseButton.x ;
-                posy = event.mouseButton.y;
-
-
-            }
-        }
-
-        window.clear();
-        draw(board.ReturnAllPieces(), window);
-
-        window.display();
-    }
 
 
     return 0;

@@ -8,7 +8,7 @@ set(SOURCE_FILES
         include/Game.h
         include/Piece.h
         src/main.cpp
-        src/Piece.cpp include/Board.h src/Board.cpp src/Game.cpp)
+        src/Piece.cpp include/Board.h src/Board.cpp src/Game.cpp include/ColorPalette.h src/ColorPalette.cpp)
 
 
 

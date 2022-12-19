@@ -4,7 +4,14 @@
 
 #ifndef CHESS_GAME_H
 #define CHESS_GAME_H
+#define HEIGHT 800
+#define WIDTH 800
+#define PIECE_HEIGHT (HEIGHT/8)
+#define PIECE_WIDTH (WIDTH/8)
+
 #include "Board.h"
+#include "SFML/Graphics.hpp"
+#include "ColorPalette.h"
 using uInt = unsigned int;
 
 
@@ -13,15 +20,22 @@ class Game{
 private:
     uInt mx; uInt my;
     uInt bx; uInt by;
+    ColorPalette palette;
+    Board board;
 
-    std::shared_ptr<Board> game_bard;
+    sf::RenderWindow window;
     bool current_player;
 
+
 public:
+    Game();
+
+    void GameLoop();
     void OnClick(uInt mouse_x, uInt mouse_y);
-    bool MakeAction(uInt board_x, uInt board_y);
+    bool MakeAction();
     void ChangeTurn();
-    void Draw();
+    void Draw(const std::vector<std::shared_ptr<Piece>> &pieces, sf::RenderWindow &Window);
+
 
 };
 

@@ -28,9 +28,7 @@ std::vector<std::tuple<int, int>> Piece::LegalTakes() {
     return moves;
 }
 
-void Piece::Move() {
 
-}
 
 
 std::tuple<int,int> Piece::GetPos() {
@@ -39,4 +37,8 @@ std::tuple<int,int> Piece::GetPos() {
 
 bool Piece::GetColor(){
     return this->color;
+}
+
+void Piece::Move(uInt pos_x, uInt pos_y) {
+
 }
