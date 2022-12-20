@@ -22,7 +22,7 @@ public:
 
     int PieceAt(uInt posx, uInt posy);
 
-    void RemovePiece(std::tuple<int> location);
+    void RemovePieceAt(uInt board_index);
 
     void SetCurrentPiece(std::shared_ptr<Piece> location);
 

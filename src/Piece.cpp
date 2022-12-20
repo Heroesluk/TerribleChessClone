@@ -18,20 +18,25 @@ std::vector<std::tuple<int, int>> Piece::LegalMoves() {
         direction = -1;
     }
 
-
     std::vector<std::tuple<int,int>> moves;
     moves.emplace_back(pos_x, pos_y+(direction));
-
-
 
     return moves;
 }
 
 std::vector<std::tuple<int, int>> Piece::LegalTakes() {
-    std::vector<std::tuple<int,int>> moves;
-    for(auto i=0; i<3;i++){
-        moves.emplace_back(pos_x,pos_y);
+
+    int direction;
+    if(color){
+        direction = 1;
+    } else{
+        direction = -1;
     }
+
+    std::vector<std::tuple<int,int>> moves;
+    moves.emplace_back(pos_x+1, pos_y+(direction));
+    moves.emplace_back(pos_x-1, pos_y+(direction));
+
 
     return moves;
 }
@@ -55,3 +60,4 @@ void Piece::Move(uInt posx, uInt posy) {
 uInt Piece::GetPosIndex() {
     return (pos_x*8)+pos_y;
 }
+
