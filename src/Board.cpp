@@ -7,76 +7,65 @@ std::shared_ptr<Piece> Board::GetPiece(uInt posx, uInt posy) {
 }
 
 bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY) {
-    int check = PieceAt(board_cursorX, board_cursorY); //0 -> no piece, 1 -> whitep, 2 -> blackp
-    auto held = GetCurrentlyHeldPiece(); //nullptr if no piece held
+    int type_at_cursor = PieceAt(board_cursorX, board_cursorY); //0 -> no piece, 1 -> whitep, 2 -> blackp
+    auto held_piece = GetCurrentlyHeldPiece(); //nullptr if no piece held_piece
 
-    if (check == 0) { //if piece not found at x,y
-        if (held != nullptr) {
-
-
-            for (auto mv: held->LegalMoves()) {
+    if (type_at_cursor == 0) { //if piece not found at x,y
+        if (held_piece != nullptr) {
+            for (auto mv: held_piece->LegalMoves()) {
                 if (mv == std::make_tuple(board_cursorX, board_cursorY)) {
-                    held->Move(board_cursorX, board_cursorY);
-                    //auto takes = held->LegalTakes();
+                    held_piece->Move(board_cursorX, board_cursorY);
+                    //auto takes = held_piece->LegalTakes();
                     SetCurrentPiece(nullptr);
                 }
             }
 
-            UpdateTable();
         };
         //if we don't hold any piece AND we click empty space, nothing happens
 
     }
 
-    else if (check == 1) { //if white piece found
+    else if (type_at_cursor == 1) { //if white piece found
         auto piece_at_click = GetPiece(board_cursorX,board_cursorY);
 
-        if (held == nullptr) {
+        if (held_piece == nullptr) {
             SetCurrentPiece(piece_at_click);
         }
 
         else{
-            for (auto mv: held->LegalTakes()) {
+            for (auto mv: held_piece->LegalTakes()) {
                 if (mv == std::make_tuple(board_cursorX, board_cursorY)) {
                     RemovePieceAt(piece_at_click->GetPosIndex());
-                    held->Move(board_cursorX, board_cursorY);
+                    held_piece->Move(board_cursorX, board_cursorY);
                     SetCurrentPiece(nullptr);
                 }
             }
         }
 
-        UpdateTable();
-
-
 
     }
 
 
-    else if (check == 2) { //if black piece found
+    else if (type_at_cursor == 2) { //if black piece found
         auto piece_at_click = GetPiece(board_cursorX,board_cursorY);
 
-        if (held == nullptr) {
-            held = GetPiece(board_cursorX, board_cursorY);
-            SetCurrentPiece(held);
+        if (held_piece == nullptr) {
+            held_piece = GetPiece(board_cursorX, board_cursorY);
+            SetCurrentPiece(held_piece);
         }
 
         else{
-            for (auto mv: held->LegalTakes()) {
+            for (auto mv: held_piece->LegalTakes()) {
                 if (mv == std::make_tuple(board_cursorX, board_cursorY)) {
                     RemovePieceAt(piece_at_click->GetPosIndex());
-                    held->Move(board_cursorX, board_cursorY);
+                    held_piece->Move(board_cursorX, board_cursorY);
                     SetCurrentPiece(nullptr);
                 }
             }
         }
-
-        UpdateTable();
-
-
-
-
     }
 
+    UpdateTable();
     return false;
 
 }
