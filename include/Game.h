@@ -1,5 +1,5 @@
 //
-// Created by heroesluk on 17.12.22.
+// Created boardY heroesluk on 17.12.22.
 //
 
 #ifndef CHESS_GAME_H
@@ -19,7 +19,7 @@ using uInt = unsigned int;
 class Game{
 private:
     uInt mx; uInt my;
-    uInt bx; uInt by;
+    uInt boardX; uInt boardY;
     ColorPalette palette;
     Board board;
 
@@ -31,7 +31,7 @@ public:
     Game();
 
     void GameLoop();
-    void OnClick(uInt mouse_x, uInt mouse_y);
+    void ClickToBoardCoords(uInt mouse_x, uInt mouse_y);
     bool MakeAction();
     void ChangeTurn();
     void Draw(const std::vector<std::shared_ptr<Piece>> &pieces, sf::RenderWindow &Window);

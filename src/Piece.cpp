@@ -1,5 +1,5 @@
 //
-// Created by heroesluk on 17.12.22.
+// Created boardY heroesluk on 17.12.22.
 //
 
 #include "Piece.h"
@@ -36,9 +36,14 @@ std::tuple<int,int> Piece::GetPos() {
 }
 
 bool Piece::GetColor(){
-    return this->color;
+    return color;
 }
 
-void Piece::Move(uInt pos_x, uInt pos_y) {
+void Piece::Move(uInt posx, uInt posy) {
+    pos_x = posx;
+    pos_y = posy;
+}
 
+uInt Piece::GetPosIndex() {
+    return (pos_x*8)+pos_y;
 }

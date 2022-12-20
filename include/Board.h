@@ -1,5 +1,5 @@
 //
-// Created by heroesluk on 17.12.22.
+// Created boardY heroesluk on 17.12.22.
 //
 
 
@@ -19,12 +19,15 @@ using uInt = unsigned int;
 class Board{
 private:
     std::vector<std::shared_ptr<Piece>> board_table;
+    std::unordered_map<uInt , uInt> pieces_locations;
     std::shared_ptr<Piece> currently_held_piece;
 public:
-    std::shared_ptr<Piece> GetPiece();
-    bool PieceAt();
+    std::shared_ptr<Piece> GetPiece(uInt posx, uInt posy);
+    int PieceAt(uInt posx, uInt posy);
     void RemovePiece(std::tuple<int> location);
     void SetCurrentPiece(std::shared_ptr<Piece> location);
+    bool HoldingPiece();
+    std::shared_ptr<Piece> GetCurrentlyHeldPiece();
     uInt CheckForWin();
     void Castle();
     void UpdateTable();

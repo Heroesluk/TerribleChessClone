@@ -1,5 +1,5 @@
 //
-// Created by heroesluk on 19.12.22.
+// Created boardY heroesluk on 19.12.22.
 //
 
 #ifndef CHESS_COLORPALETTE_H

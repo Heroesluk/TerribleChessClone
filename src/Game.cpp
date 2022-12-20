@@ -1,15 +1,48 @@
 #include "Game.h"
 #include "math.h"
+#include "iostream"
 
-void Game::OnClick(uInt mouse_x, uInt mouse_y) {
-    bx = floor(mouse_x/PIECE_WIDTH);
-    by = floor(mouse_y/PIECE_HEIGHT);
+void Game::ClickToBoardCoords(uInt mouse_x, uInt mouse_y) {
+    boardX = floor(mouse_x / PIECE_WIDTH);
+    boardY = floor(mouse_y / PIECE_HEIGHT);
 
 }
 
 bool Game::MakeAction() {
+    int check = board.PieceAt(boardX, boardY);
+    int click = -1;
+    auto held = board.GetCurrentlyHeldPiece();
 
-    return 0;
+
+    if (check == 0) {
+        //if check failed and piece not found at x,y
+        if (held != nullptr) {
+            held->Move(boardX, boardY);
+            board.SetCurrentPiece(nullptr);
+            board.UpdateTable();
+        };
+        //if we don't hold any piece AND we click empty space, nothing happens
+    }
+    else if (check == 1) { //if white piece found
+        if (held == nullptr) {
+            held = board.GetPiece(boardX, boardY);
+            board.SetCurrentPiece(held);
+            board.UpdateTable();
+
+
+        };
+
+    }
+    else if (check == 2) { //if black piece found
+        if (held == nullptr) {
+            held = board.GetPiece(boardX, boardY);
+            board.SetCurrentPiece(held);
+        }
+    }
+
+    std::cout << check;
+
+    return false;
 
 }
 
@@ -18,7 +51,7 @@ void Game::ChangeTurn() {
 }
 
 
-Game::Game(): window(sf::VideoMode(WIDTH, HEIGHT), "My window")  {
+Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "My window") {
 
     board.SetupBoardPieces();
 
@@ -63,11 +96,10 @@ void Game::GameLoop() {
             if (event.type == sf::Event::Closed)
                 window.close();
 
-            else if(event.type == sf::Event::MouseButtonReleased){
-                OnClick(event.mouseButton.x, event.mouseButton.y);
+            else if (event.type == sf::Event::MouseButtonPressed) {
 
-                mx = event.mouseButton.x ;
-                my = event.mouseButton.y;
+                //
+                ClickToBoardCoords(event.mouseButton.x, event.mouseButton.y);
 
                 MakeAction();
 

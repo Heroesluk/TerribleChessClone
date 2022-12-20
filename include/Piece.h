@@ -1,5 +1,5 @@
 //
-// Created by heroesluk on 17.12.22.
+// Created boardY heroesluk on 17.12.22.
 //
 
 #ifndef INC_Chess_PIECE_H
@@ -25,6 +25,7 @@ public:
 
     bool GetColor();
     std::tuple<int,int> GetPos();
+    uInt GetPosIndex();
 
 };
 
