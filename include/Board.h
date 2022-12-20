@@ -18,6 +18,8 @@ private:
 public:
     std::shared_ptr<Piece> GetPiece(uInt posx, uInt posy);
 
+    bool MakeAction(uInt board_cursorX, uInt board_cursorY);
+
     int PieceAt(uInt posx, uInt posy);
 
     void RemovePiece(std::tuple<int> location);

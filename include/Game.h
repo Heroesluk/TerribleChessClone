@@ -36,7 +36,6 @@ public:
 
     void ClickToBoardCoords(uInt mouse_x, uInt mouse_y);
 
-    bool MakeAction();
 
     void ChangeTurn();
 

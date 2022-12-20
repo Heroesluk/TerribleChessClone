@@ -6,6 +6,42 @@ std::shared_ptr<Piece> Board::GetPiece(uInt posx, uInt posy) {
     return board_table[index];
 }
 
+bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY) {
+    int check = PieceAt(board_cursorX, board_cursorY);
+    int click = -1;
+    auto held = GetCurrentlyHeldPiece();
+
+
+    if (check == 0) {
+        //if check failed and piece not found at x,y
+        if (held != nullptr) {
+            held->Move(board_cursorX, board_cursorY);
+            SetCurrentPiece(nullptr);
+            UpdateTable();
+        };
+        //if we don't hold any piece AND we click empty space, nothing happens
+    }
+    else if (check == 1) { //if white piece found
+        if (held == nullptr) {
+            held = GetPiece(board_cursorX, board_cursorY);
+            SetCurrentPiece(held);
+            UpdateTable();
+        };
+
+    }
+    else if (check == 2) { //if black piece found
+        if (held == nullptr) {
+            held = GetPiece(board_cursorX, board_cursorY);
+            SetCurrentPiece(held);
+        }
+    }
+
+    return false;
+
+}
+
+
+
 int Board::PieceAt(uInt posx, uInt posy) {
 
     auto found = pieces_locations.count((posx*8)+posy);

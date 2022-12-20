@@ -8,41 +8,6 @@ void Game::ClickToBoardCoords(uInt mouse_x, uInt mouse_y) {
 
 }
 
-bool Game::MakeAction() {
-    int check = board.PieceAt(boardX, boardY);
-    int click = -1;
-    auto held = board.GetCurrentlyHeldPiece();
-
-
-    if (check == 0) {
-        //if check failed and piece not found at x,y
-        if (held != nullptr) {
-            held->Move(boardX, boardY);
-            board.SetCurrentPiece(nullptr);
-            board.UpdateTable();
-        };
-        //if we don't hold any piece AND we click empty space, nothing happens
-    }
-    else if (check == 1) { //if white piece found
-        if (held == nullptr) {
-            held = board.GetPiece(boardX, boardY);
-            board.SetCurrentPiece(held);
-            board.UpdateTable();
-        };
-
-    }
-    else if (check == 2) { //if black piece found
-        if (held == nullptr) {
-            held = board.GetPiece(boardX, boardY);
-            board.SetCurrentPiece(held);
-        }
-    }
-
-    std::cout << check;
-
-    return false;
-
-}
 
 void Game::ChangeTurn() {
 
@@ -99,7 +64,7 @@ void Game::GameLoop() {
                 //
                 ClickToBoardCoords(event.mouseButton.x, event.mouseButton.y);
 
-                MakeAction();
+                board.MakeAction(boardX,boardY);
 
 
             }
