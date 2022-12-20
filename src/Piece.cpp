@@ -11,10 +11,18 @@ Piece::Piece(uInt pos_x, uInt pos_y, bool color) {
 }
 
 std::vector<std::tuple<int, int>> Piece::LegalMoves() {
-    std::vector<std::tuple<int,int>> moves;
-    for(auto i=0; i<3;i++){
-        moves.emplace_back(i,i);
+    int direction;
+    if(color){
+        direction = 1;
+    } else{
+        direction = -1;
     }
+
+
+    std::vector<std::tuple<int,int>> moves;
+    moves.emplace_back(pos_x, pos_y+(direction));
+
+
 
     return moves;
 }

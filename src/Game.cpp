@@ -28,8 +28,6 @@ bool Game::MakeAction() {
             held = board.GetPiece(boardX, boardY);
             board.SetCurrentPiece(held);
             board.UpdateTable();
-
-
         };
 
     }

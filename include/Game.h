@@ -12,14 +12,16 @@
 #include "Board.h"
 #include "SFML/Graphics.hpp"
 #include "ColorPalette.h"
+
 using uInt = unsigned int;
 
 
-
-class Game{
+class Game {
 private:
-    uInt mx; uInt my;
-    uInt boardX; uInt boardY;
+    uInt mx;
+    uInt my;
+    uInt boardX;
+    uInt boardY;
     ColorPalette palette;
     Board board;
 
@@ -31,9 +33,13 @@ public:
     Game();
 
     void GameLoop();
+
     void ClickToBoardCoords(uInt mouse_x, uInt mouse_y);
+
     bool MakeAction();
+
     void ChangeTurn();
+
     void Draw(const std::vector<std::shared_ptr<Piece>> &pieces, sf::RenderWindow &Window);
 
 
