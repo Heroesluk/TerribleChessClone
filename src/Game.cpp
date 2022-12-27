@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "math.h"
+#include "cmath"
 #include "iostream"
 
 void Game::ClickToBoardCoords(uInt mouse_x, uInt mouse_y) {
@@ -20,7 +20,7 @@ Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "My window") {
 
 }
 
-void Game::Draw(const std::vector<std::shared_ptr<Piece>> &pieces, sf::RenderWindow &Window) {
+void Game::Draw(const std::vector<int> &pieces_locations, sf::RenderWindow &Window) {
     ColorPalette colors(sf::Color(102, 204, 102),
                         sf::Color(255, 243, 230),
                         sf::Color(255, 43, 103),
@@ -40,15 +40,19 @@ void Game::Draw(const std::vector<std::shared_ptr<Piece>> &pieces, sf::RenderWin
 
     }
 
-    for (auto piece: pieces) {
-        sf::RectangleShape piece_sprite(sf::Vector2f(PIECE_WIDTH, PIECE_HEIGHT));
-        auto [x, y] = piece->GetPos();
-        piece_sprite.setPosition(x * PIECE_WIDTH, y * PIECE_WIDTH);
-        if (piece->GetColor()) {
-            piece_sprite.setFillColor(colors.white_piece);
-        } else piece_sprite.setFillColor(colors.black_piece);
+    for (int ind = 0; ind<pieces_locations.size(); ind++) {
+        if (pieces_locations[ind] != -1) {
+            sf::RectangleShape piece_sprite(sf::Vector2f(PIECE_WIDTH, PIECE_HEIGHT));
+            int y = floor(ind/8);
+            int x = ind%8;
+            piece_sprite.setPosition(x * PIECE_WIDTH, y * PIECE_WIDTH);
+            if (pieces_locations[ind]==1) {
+                piece_sprite.setFillColor(colors.white_piece);
+            } else piece_sprite.setFillColor(colors.black_piece);
+            Window.draw(piece_sprite);
 
-        Window.draw(piece_sprite);
+        }
+
     }
 }
 
@@ -64,14 +68,15 @@ void Game::GameLoop() {
                 //
                 ClickToBoardCoords(event.mouseButton.x, event.mouseButton.y);
 
-                board.MakeAction(boardX,boardY);
+                board.MakeAction(boardX, boardY);
 
 
             }
         }
 
         window.clear();
-        Draw(board.ReturnAllPieces(), window);
+
+        Draw(board.ReturnPiecesPositions(), window);
 
         window.display();
     }

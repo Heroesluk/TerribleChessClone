@@ -39,7 +39,7 @@ public:
 
     void ChangeTurn();
 
-    void Draw(const std::vector<std::shared_ptr<Piece>> &pieces, sf::RenderWindow &Window);
+    void Draw(const std::vector<int> &pieces_locations, sf::RenderWindow &Window);
 
 
 };

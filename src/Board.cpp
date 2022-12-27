@@ -3,78 +3,26 @@
 
 std::shared_ptr<Piece> Board::GetPiece(uInt posx, uInt posy) {
 
-    return table[posx+(posy*8)];
+    return table[posx + (posy * 8)];
 }
 
 bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY) {
-    int type_at_cursor = PieceAt(board_cursorX, board_cursorY); //0 -> no piece, 1 -> whitep, 2 -> blackp
-    auto held_piece = GetCurrentlyHeldPiece(); //nullptr if no piece held_piece
-    std::shared_ptr<Piece> piece_at_click;
-    if (type_at_cursor == 0) {
-        piece_at_click = nullptr;
-    } else {
-        piece_at_click = GetPiece(board_cursorX, board_cursorY);
+    auto ifpc = PieceAt(board_cursorX,board_cursorY);
+    if(ifpc){
+        auto piece = GetPiece(board_cursorX,board_cursorY);
+        SetCurrentPiece(piece);
     }
-
-
-    if (held_piece == nullptr) {
-        SetCurrentPiece(piece_at_click);
-    }
-
-
-    else if (type_at_cursor == 0) { //if piece not found at x,y
-        for (auto mv: held_piece->LegalMoves()) {
-            if (mv == std::make_tuple(board_cursorX, board_cursorY)) {
-                held_piece->Move(board_cursorX, board_cursorY);
-                //auto takes = held_piece->LegalTakes();
-                SetCurrentPiece(nullptr);
-            }
-        }
-    }
-
-    else if (type_at_cursor == 1) { //if white piece found
-        if(held_piece->GetColor()==1){ //swap held piece if color match
-            SetCurrentPiece(piece_at_click);
-        }
-        else{ //if opposite color then check if you can take
-            for (auto mv: held_piece->LegalTakes()) {
-                if (mv == std::make_tuple(board_cursorX, board_cursorY)) {
-                    RemovePieceAt(piece_at_click->GetPosIndex());
-                    held_piece->Move(board_cursorX, board_cursorY);
-                    SetCurrentPiece(nullptr);
-                }
-            }
-
-        }
-    }
-
-    else if (type_at_cursor == 2) { //if black piece found
-        if(held_piece->GetColor()==0){
-            SetCurrentPiece(piece_at_click);
-        }
-        else{
-            for (auto mv: held_piece->LegalTakes()) {
-                if (mv == std::make_tuple(board_cursorX, board_cursorY)) {
-                    RemovePieceAt(piece_at_click->GetPosIndex());
-                    held_piece->Move(board_cursorX, board_cursorY);
-                    SetCurrentPiece(nullptr);
-                }
-            }
-
-        }
-
+    else if(currently_held_piece!= nullptr){
 
     }
-    UpdateTable();
-    return false;
-
 
 }
 
 int Board::PieceAt(uInt posx, uInt posy) {
     //search dictionary for occurrence of a piece at location 0 if not found 1 if found
+    auto pc = table.at((posx * 8) + posy);
 
-    if(table.at((posx*8)+posy)!=nullptr){
+    if (pc != nullptr) {
         auto piece = GetPiece(posx, posy);
         if (piece->GetColor() == 1) {
             return 1;
@@ -139,21 +87,15 @@ void Board::SetupBoardPieces() {
     board_table.push_back(std::make_shared<Piece>(7, 7, false));
 
 
-    for(int i=0;i<64;i++){
+    for (int i = 0; i < 64; i++) {
         table.push_back(nullptr);
     }
 
-    for(auto pc: board_table){
+    for (auto pc: board_table) {
         auto index = pc->GetPosIndex();
         table.at(index) = pc;
 
     }
-
-
-
-
-
-
 
 
     Board::UpdateTable();
@@ -162,7 +104,22 @@ void Board::SetupBoardPieces() {
 
 
 std::vector<std::shared_ptr<Piece>> Board::ReturnAllPieces() {
-    return board_table;
+    return table;
+}
+
+std::vector<int> Board::ReturnPiecesPositions() {
+    std::vector<int> positions;
+    for (auto pc: table) {
+        if (pc == nullptr) {
+            positions.push_back(-1);
+        } else if (pc->GetColor()) {
+            positions.push_back(1);
+        } else {
+            positions.push_back(0);
+        }
+    }
+
+    return positions;
 }
 
 std::shared_ptr<Piece> Board::GetCurrentlyHeldPiece() {

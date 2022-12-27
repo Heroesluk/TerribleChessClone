@@ -44,6 +44,8 @@ public:
 
     uInt CheckForCheck();
 
+    std::vector<int> ReturnPiecesPositions();
+
 };
 
 #endif //CHESS_BOARD_H
