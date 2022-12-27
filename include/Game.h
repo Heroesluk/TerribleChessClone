@@ -25,8 +25,11 @@ private:
     ColorPalette palette;
     Board board;
 
+
     sf::RenderWindow window;
     bool current_player;
+    int turn{0};
+
 
 
 public:

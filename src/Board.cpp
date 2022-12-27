@@ -9,21 +9,42 @@ std::shared_ptr<Piece> Board::GetPiece(uInt posx, uInt posy) {
     return clicked;
 }
 
-bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY) {
+bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_move) {
 
-    auto pc_at = PieceAt(board_cursorX, board_cursorY);
-    if (pc_at != 0) {
-        auto piece = GetPiece(board_cursorX, board_cursorY);
-        SetCurrentPiece(piece);
-    } else if (currently_held_piece != nullptr) {
+    auto pc_at_click = GetPiece(board_cursorX, board_cursorY);
+    if (pc_at_click != nullptr) {
+        if(currently_held_piece==nullptr && pc_at_click->GetColor()==color_to_move){
+            SetCurrentPiece(pc_at_click);
+        }
+        else if(currently_held_piece != nullptr) {
+            if (pc_at_click->GetColor() == currently_held_piece->GetColor()) {
+                SetCurrentPiece(pc_at_click); //swap currently held piece if matches held piece
+            }
+            else if(currently_held_piece->GetColor()==color_to_move){
+                currently_held_piece->Move(board_cursorX, board_cursorY);
+                SetCurrentPiece(nullptr);
+                RemovePieceAt(board_cursorX+(board_cursorY*8));
+                UpdateTable();
+                return true;
 
-        currently_held_piece->Move(board_cursorX, board_cursorY);
-        SetCurrentPiece(nullptr);
+            }
+        }
 
+    }
+    else if (currently_held_piece != nullptr) {
+        if(currently_held_piece->GetColor()==color_to_move){
+            currently_held_piece->Move(board_cursorX, board_cursorY);
+            SetCurrentPiece(nullptr);
+            UpdateTable();
+            return true;
+
+        }
 
     }
 
+
     UpdateTable();
+    return false;
 
 }
 

@@ -17,6 +17,7 @@ void Game::ChangeTurn() {
 Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "My window") {
 
     board.SetupBoardPieces();
+    current_player = true;
 
 }
 
@@ -68,7 +69,11 @@ void Game::GameLoop() {
                 //
                 ClickToBoardCoords(event.mouseButton.x, event.mouseButton.y);
 
-                board.MakeAction(boardX, boardY);
+                bool moved = board.MakeAction(boardX, boardY, turn%2);
+                if(moved){
+                    turn+=1;
+                }
+
 
 
             }

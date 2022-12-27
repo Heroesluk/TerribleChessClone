@@ -15,11 +15,12 @@ private:
     std::vector<Piece> pieces;
     std::shared_ptr<Piece> currently_held_piece;
     std::vector<std::shared_ptr<Piece>>piece_table;
+    bool moved;
 
 public:
     std::shared_ptr<Piece> GetPiece(uInt posx, uInt posy);
 
-    bool MakeAction(uInt board_cursorX, uInt board_cursorY);
+    bool MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_move);
 
     int PieceAt(uInt posx, uInt posy);
 
