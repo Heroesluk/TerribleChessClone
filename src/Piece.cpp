@@ -3,6 +3,7 @@
 //
 
 #include "Piece.h"
+#include "algorithm"
 
 Piece::Piece(uInt pos_x, uInt pos_y, bool color) {
     this->pos_x = pos_x;
@@ -23,6 +24,18 @@ std::vector<std::tuple<int, int>> Piece::LegalMoves() {
 
     return moves;
 }
+
+bool Piece::CheckIfLegalMove(std::tuple<int,int> move){
+    auto moves = Piece::LegalMoves();
+    return std::find(moves.begin(), moves.end(),move)!=moves.end();
+
+
+
+}
+bool Piece::CheckIfLegalTake(){
+
+}
+
 
 std::vector<std::tuple<int, int>> Piece::LegalTakes() {
 

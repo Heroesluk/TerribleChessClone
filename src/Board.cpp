@@ -36,13 +36,13 @@ bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_mov
     }
     else if (currently_held_piece != nullptr) {
         if(currently_held_piece->GetColor()==color_to_move){ //move piece to empty square
-            currently_held_piece->Move(board_cursorX, board_cursorY);
-            SetCurrentPiece(nullptr);
-            UpdateTable();
-            return true;
-
+            if(currently_held_piece->CheckIfLegalMove(std::make_tuple(board_cursorX,board_cursorY))){
+                currently_held_piece->Move(board_cursorX, board_cursorY);
+                SetCurrentPiece(nullptr);
+                UpdateTable();
+                return true;
+            }
         }
-
     }
 
 
