@@ -10,17 +10,20 @@ std::shared_ptr<Piece> Board::GetPiece(uInt posx, uInt posy) {
 }
 
 bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_move) {
+    //function returns true if it makes any real movement on the board
+    //swapping held piece does not count
+
 
     auto pc_at_click = GetPiece(board_cursorX, board_cursorY);
     if (pc_at_click != nullptr) {
-        if(currently_held_piece==nullptr && pc_at_click->GetColor()==color_to_move){
+        if(currently_held_piece==nullptr && pc_at_click->GetColor()==color_to_move){ //set a held piece if not holding anything
             SetCurrentPiece(pc_at_click);
         }
         else if(currently_held_piece != nullptr) {
-            if (pc_at_click->GetColor() == currently_held_piece->GetColor()) {
-                SetCurrentPiece(pc_at_click); //swap currently held piece if matches held piece
+            if (pc_at_click->GetColor() == currently_held_piece->GetColor()) { //swap currently held piece if matches held piece
+                SetCurrentPiece(pc_at_click);
             }
-            else if(currently_held_piece->GetColor()==color_to_move){
+            else if(currently_held_piece->GetColor()==color_to_move){ //take an enemy piece, replace with own
                 currently_held_piece->Move(board_cursorX, board_cursorY);
                 SetCurrentPiece(nullptr);
                 RemovePieceAt(board_cursorX+(board_cursorY*8));
@@ -32,7 +35,7 @@ bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_mov
 
     }
     else if (currently_held_piece != nullptr) {
-        if(currently_held_piece->GetColor()==color_to_move){
+        if(currently_held_piece->GetColor()==color_to_move){ //move piece to empty square
             currently_held_piece->Move(board_cursorX, board_cursorY);
             SetCurrentPiece(nullptr);
             UpdateTable();
