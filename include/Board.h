@@ -14,6 +14,7 @@ class Board {
 private:
     std::vector<std::shared_ptr<Piece>> board_table;
     std::unordered_map<uInt, uInt> pieces_locations;
+
     std::shared_ptr<Piece> currently_held_piece;
 public:
     std::shared_ptr<Piece> GetPiece(uInt posx, uInt posy);
