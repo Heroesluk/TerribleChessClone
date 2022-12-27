@@ -12,10 +12,9 @@ using uInt = unsigned int;
 
 class Board {
 private:
-    std::vector<std::shared_ptr<Piece>> board_table;
-    std::unordered_map<uInt, uInt> pieces_locations;
+    std::vector<Piece> pieces;
     std::shared_ptr<Piece> currently_held_piece;
-    std::vector<std::shared_ptr<Piece>>table;
+    std::vector<std::shared_ptr<Piece>>piece_table;
 
 public:
     std::shared_ptr<Piece> GetPiece(uInt posx, uInt posy);
