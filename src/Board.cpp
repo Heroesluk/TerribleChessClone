@@ -3,8 +3,7 @@
 
 std::shared_ptr<Piece> Board::GetPiece(uInt posx, uInt posy) {
 
-    auto index = pieces_locations[(posx * 8) + posy];
-    return board_table[index];
+    return table[posx+(posy*8)];
 }
 
 bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY) {
@@ -74,17 +73,17 @@ bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY) {
 
 int Board::PieceAt(uInt posx, uInt posy) {
     //search dictionary for occurrence of a piece at location 0 if not found 1 if found
-    auto found = pieces_locations.count((posx * 8) + posy);
 
-
-    if (found == 1) {
+    if(table.at((posx*8)+posy)!=nullptr){
         auto piece = GetPiece(posx, posy);
         if (piece->GetColor() == 1) {
             return 1;
         } else if (piece->GetColor() == 0) {
             return 2;
         }
-    };
+
+    }
+
     return 0;
 
 }
@@ -138,6 +137,23 @@ void Board::SetupBoardPieces() {
     board_table.push_back(std::make_shared<Piece>(5, 7, false));
     board_table.push_back(std::make_shared<Piece>(6, 7, false));
     board_table.push_back(std::make_shared<Piece>(7, 7, false));
+
+
+    for(int i=0;i<64;i++){
+        table.push_back(nullptr);
+    }
+
+    for(auto pc: board_table){
+        auto index = pc->GetPosIndex();
+        table.at(index) = pc;
+
+    }
+
+
+
+
+
+
 
 
     Board::UpdateTable();

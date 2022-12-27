@@ -58,6 +58,6 @@ void Piece::Move(uInt posx, uInt posy) {
 }
 
 uInt Piece::GetPosIndex() {
-    return (pos_x*8)+pos_y;
+    return pos_x+(8*pos_y);
 }
 
