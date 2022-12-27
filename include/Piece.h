@@ -12,7 +12,7 @@ using uInt = unsigned int;
 
 
 class Piece {
-private:
+protected:
     bool color;
     uInt pos_x;
     uInt pos_y;
@@ -25,13 +25,8 @@ public:
     std::vector<std::tuple<int, int>> LegalTakes();
     bool CheckIfLegalTake();
 
-
     void Move(uInt pos_x, uInt pos_y);
-
     bool GetColor();
-
-    std::tuple<int, int> GetPos();
-
     uInt GetPosIndex();
 
 };

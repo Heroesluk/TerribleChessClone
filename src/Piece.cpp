@@ -29,11 +29,6 @@ bool Piece::CheckIfLegalMove(std::tuple<int,int> move){
     auto moves = Piece::LegalMoves();
     return std::find(moves.begin(), moves.end(),move)!=moves.end();
 
-
-
-}
-bool Piece::CheckIfLegalTake(){
-
 }
 
 
@@ -52,13 +47,6 @@ std::vector<std::tuple<int, int>> Piece::LegalTakes() {
 
 
     return moves;
-}
-
-
-
-
-std::tuple<int,int> Piece::GetPos() {
-    return std::make_tuple(pos_x,pos_y);
 }
 
 bool Piece::GetColor(){

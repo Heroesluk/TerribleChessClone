@@ -8,12 +8,6 @@ void Game::ClickToBoardCoords(uInt mouse_x, uInt mouse_y) {
 
 }
 
-
-void Game::ChangeTurn() {
-
-}
-
-
 Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "My window") {
 
     board.SetupBoardPieces();

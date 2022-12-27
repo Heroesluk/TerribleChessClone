@@ -24,27 +24,20 @@ public:
 
     int PieceAt(uInt posx, uInt posy);
 
-    void RemovePieceAt(uInt board_index);
+    void RemovePieceAt(uInt posx, uInt posy);
 
-    void SetCurrentPiece(std::shared_ptr<Piece> location);
-
-    bool HoldingPiece();
-
-    std::shared_ptr<Piece> GetCurrentlyHeldPiece();
-
-    uInt CheckForWin();
-
-    void Castle();
+    void SetCurrentPiece(std::shared_ptr<Piece> cur_piece);
 
     void UpdateTable();
 
-    std::vector<std::shared_ptr<Piece>> ReturnAllPieces();
-
     void SetupBoardPieces();
 
-    uInt CheckForCheck();
-
     std::vector<int> ReturnPiecesPositions();
+
+    uInt CheckForWin();
+    void Castle();
+    std::vector<std::shared_ptr<Piece>> ReturnAllPieces();
+    uInt CheckForCheck();
 
 };
 
