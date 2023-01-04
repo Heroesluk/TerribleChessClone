@@ -23,7 +23,7 @@ void Board::SetupBoardPieces() {
     pieces.emplace_back(Piece(7, 7, false));
 
     for (int i = 0; i < 64; i++) {
-        piece_table2.emplace(i,nullptr);
+        piece_table2.emplace(i, nullptr);
     }
 
     for (auto pc: pieces) {
@@ -43,27 +43,26 @@ bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_mov
     auto pc_at_click = GetPiece(board_cursorX, board_cursorY);
 
     if (pc_at_click != nullptr) {
-        if(currently_held_piece==nullptr && pc_at_click->GetColor()==color_to_move){ //set a held piece if not holding anything
+        if (currently_held_piece == nullptr &&
+            pc_at_click->GetColor() == color_to_move) { //set a held piece if not holding anything
             SetCurrentPiece(pc_at_click);
-        }
-        else if(currently_held_piece != nullptr) {
-            if (pc_at_click->GetColor() == currently_held_piece->GetColor()) { //swap currently held piece if matches held piece
+        } else if (currently_held_piece != nullptr) {
+            if (pc_at_click->GetColor() ==
+                currently_held_piece->GetColor()) { //swap currently held piece if matches held piece
                 SetCurrentPiece(pc_at_click);
-            }
-            else if(currently_held_piece->GetColor()==color_to_move){ //take an enemy piece, replace with own
+            } else if (currently_held_piece->GetColor() == color_to_move) { //take an enemy piece, replace with own
                 currently_held_piece->Move(board_cursorX, board_cursorY);
                 SetCurrentPiece(nullptr);
-                RemovePieceAt(board_cursorX,board_cursorY);
+                RemovePieceAt(board_cursorX, board_cursorY);
                 UpdateTable();
                 return true;
 
             }
         }
 
-    }
-    else if (currently_held_piece != nullptr) {
-        if(currently_held_piece->GetColor()==color_to_move){ //move piece to empty square
-            if(currently_held_piece->CheckIfLegalMove(std::make_tuple(board_cursorX,board_cursorY))){
+    } else if (currently_held_piece != nullptr) {
+        if (currently_held_piece->GetColor() == color_to_move) { //move piece to empty square
+            if (currently_held_piece->CheckIfLegalMove(board_cursorX, board_cursorY)) {
                 currently_held_piece->Move(board_cursorX, board_cursorY);
                 SetCurrentPiece(nullptr);
                 UpdateTable();
@@ -94,14 +93,14 @@ void Board::UpdateTable() { //called every time a piece move
 }
 
 std::shared_ptr<Piece> Board::GetPiece(uInt posx, uInt posy) {
-    uInt ind = GetPieceIndex(posx,posy);
+    uInt ind = GetPieceIndex(posx, posy);
     auto clicked = piece_table2[ind];
 
     return clicked;
 }
 
 void Board::RemovePieceAt(uInt posx, uInt posy) {
-    piece_table2[GetPieceIndex(posx,posy)] = nullptr;
+    piece_table2[GetPieceIndex(posx, posy)] = nullptr;
 }
 
 void Board::SetCurrentPiece(std::shared_ptr<Piece> location) {
@@ -111,7 +110,7 @@ void Board::SetCurrentPiece(std::shared_ptr<Piece> location) {
 
 std::vector<int> Board::ReturnPiecesPositions() {
     std::vector<int> positions;
-    for (int i=0; i<64;i++) {
+    for (int i = 0; i < 64; i++) {
         if (piece_table2[i] == nullptr) {
             positions.push_back(-1);
         } else if (piece_table2[i]->GetColor()) {
@@ -136,17 +135,20 @@ int Board::PieceAt(uInt posx, uInt posy) {
     return 0;
 
 }
+
 uint Board::CheckForWin() {
     return 0;
 }
+
 void Board::Castle() {
 
 }
+
 std::unordered_map<uInt, std::shared_ptr<Piece>> Board::ReturnAllPieces() {
     return piece_table2;
 }
 
 uInt Board::GetPieceIndex(uInt posx, uInt posy) {
-    return posx+(8*posy);
+    return posx + (8 * posy);
 }
 

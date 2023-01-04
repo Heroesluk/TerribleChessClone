@@ -20,8 +20,8 @@ protected:
 public:
     Piece(uInt pos_x, uInt pos_y, bool color);
 
-    std::vector<std::tuple<int, int>> LegalMoves();
-    bool CheckIfLegalMove(std::tuple<int,int>);
+    std::vector<uInt> LegalMoves();
+    bool CheckIfLegalMove(uInt posx, uInt posy);
 
     std::vector<std::tuple<int, int>> LegalTakes();
     bool CheckIfLegalTake();

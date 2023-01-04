@@ -7,7 +7,7 @@
 
 Piece::Piece(uInt pos_x, uInt pos_y, bool color): pos_x{pos_x}, pos_y{pos_y}, color{color} {}
 
-std::vector<std::tuple<int, int>> Piece::LegalMoves() {
+std::vector<uInt> Piece::LegalMoves() {
     int direction;
     if(color){
         direction = 1;
@@ -15,15 +15,25 @@ std::vector<std::tuple<int, int>> Piece::LegalMoves() {
         direction = -1;
     }
 
-    std::vector<std::tuple<int,int>> moves;
-    moves.emplace_back(pos_x, pos_y+(direction));
+    std::vector<uInt> moves;
+    moves.emplace_back(pos_x+(8*(pos_y+direction)));
 
     return moves;
 }
 
-bool Piece::CheckIfLegalMove(std::tuple<int,int> move){
-    auto moves = Piece::LegalMoves();
-    return std::find(moves.begin(), moves.end(),move)!=moves.end();
+bool Piece::CheckIfLegalMove(uInt posx, uInt posy){
+    auto moves = LegalMoves();
+
+    for(auto move_index: moves){
+        if(move_index==posx+(posy*8)){
+
+
+            return true;
+        }
+    }
+
+    return false;
+
 
 }
 
