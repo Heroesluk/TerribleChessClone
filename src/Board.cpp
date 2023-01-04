@@ -2,25 +2,25 @@
 #include <bits/stdc++.h>
 
 #include <utility>
-
+#include "Pawn.h"
 void Board::SetupBoardPieces() {
 
-    pieces.emplace_back(Piece(0, 0, true));
-    pieces.emplace_back(Piece(1, 0, true));
-    pieces.emplace_back(Piece(2, 0, true));
-    pieces.emplace_back(Piece(3, 0, true));
-    pieces.emplace_back(Piece(4, 0, true));
-    pieces.emplace_back(Piece(5, 0, true));
-    pieces.emplace_back(Piece(6, 0, true));
-    pieces.emplace_back(Piece(7, 0, true));
-    pieces.emplace_back(Piece(0, 7, false));
-    pieces.emplace_back(Piece(1, 7, false));
-    pieces.emplace_back(Piece(2, 7, false));
-    pieces.emplace_back(Piece(3, 7, false));
-    pieces.emplace_back(Piece(4, 7, false));
-    pieces.emplace_back(Piece(5, 7, false));
-    pieces.emplace_back(Piece(6, 7, false));
-    pieces.emplace_back(Piece(7, 7, false));
+    pieces.emplace_back(Pawn(0, 0, true));
+    pieces.emplace_back(Pawn(1, 0, true));
+    pieces.emplace_back(Pawn(2, 0, true));
+    pieces.emplace_back(Pawn(3, 0, true));
+    pieces.emplace_back(Pawn(4, 0, true));
+    pieces.emplace_back(Pawn(5, 0, true));
+    pieces.emplace_back(Pawn(6, 0, true));
+    pieces.emplace_back(Pawn(7, 0, true));
+    pieces.emplace_back(Pawn(0, 7, false));
+    pieces.emplace_back(Pawn(1, 7, false));
+    pieces.emplace_back(Pawn(2, 7, false));
+    pieces.emplace_back(Pawn(3, 7, false));
+    pieces.emplace_back(Pawn(4, 7, false));
+    pieces.emplace_back(Pawn(5, 7, false));
+    pieces.emplace_back(Pawn(6, 7, false));
+    pieces.emplace_back(Pawn(7, 7, false));
 
     for (int i = 0; i < 64; i++) {
         piece_table2.emplace(i, nullptr);

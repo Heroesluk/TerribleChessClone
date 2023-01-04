@@ -4,6 +4,7 @@
 #include "Piece.h"
 #include "Board.h"
 #include "Game.h"
+#include "Pawn.h"
 #include "SFML/Graphics/Color.hpp"
 
 #define HEIGHT 800
@@ -28,19 +29,23 @@ void print (const std::tuple<T...>& _tup)
 
 int main() {
 
-//    Game game;
+    Game game;
+
+    game.GameLoop();
+
+//    Board board;
+//    board.SetupBoardPieces();
 //
-//    game.GameLoop();
-
-    Board board;
-    board.SetupBoardPieces();
-
-    auto pc = board.GetPiece(0,7);
-    for(auto mv: pc->LegalMoves()){
-        std::cout<<mv<<" ";
-    }
-    std::cout<<std::endl;
-
+//    auto pc2 = Pawn(0,0, true) ;
+//
+//
+//    auto pc = board.GetPiece(0,7);
+//
+//    for(auto mv: pc2.LegalMoves()){
+//        std::cout<<mv<<" ";
+//    }
+//    std::cout<<std::endl;
+//
 
 
     return 0;

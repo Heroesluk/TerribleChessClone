@@ -20,14 +20,18 @@ protected:
 public:
     Piece(uInt pos_x, uInt pos_y, bool color);
 
-    std::vector<uInt> LegalMoves();
+    virtual std::vector<uInt> LegalMoves();
+
     bool CheckIfLegalMove(uInt moveX, uInt moveY);
 
     std::vector<int> LegalTakes();
+
     bool CheckIfLegalTake(uInt takeX, uInt takeY);
 
     void Move(uInt pos_x, uInt pos_y);
+
     bool GetColor();
+
     uInt GetPosIndex();
 
 };
