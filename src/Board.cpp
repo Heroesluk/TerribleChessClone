@@ -23,12 +23,13 @@ void Board::SetupBoardPieces() {
     pieces.emplace_back(Piece(7, 7, false));
 
     for (int i = 0; i < 64; i++) {
-        piece_table.push_back(nullptr);
+        piece_table2.emplace(i,nullptr);
     }
 
     for (auto pc: pieces) {
         auto index = pc.GetPosIndex();
-        piece_table.at(index) = std::make_shared<Piece>(pc);
+        piece_table2[index] = std::make_shared<Piece>(pc);
+
     }
 
     currently_held_piece = nullptr;
@@ -40,6 +41,7 @@ bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_mov
 
 
     auto pc_at_click = GetPiece(board_cursorX, board_cursorY);
+
     if (pc_at_click != nullptr) {
         if(currently_held_piece==nullptr && pc_at_click->GetColor()==color_to_move){ //set a held piece if not holding anything
             SetCurrentPiece(pc_at_click);
@@ -77,12 +79,12 @@ bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_mov
 }
 
 void Board::UpdateTable() { //called every time a piece move
-    for (int ind = 0; ind < piece_table.size(); ind++) {
-        auto pc = piece_table.at(ind);
+    for (int ind = 0; ind < piece_table2.size(); ind++) {
+        auto pc = piece_table2[ind];
         if (pc != nullptr) {
             if (pc->GetPosIndex() != ind) {
-                piece_table[pc->GetPosIndex()] = pc;
-                piece_table[ind] = nullptr;
+                piece_table2[pc->GetPosIndex()] = pc;
+                piece_table2[ind] = nullptr;
             }
 
         }
@@ -92,13 +94,14 @@ void Board::UpdateTable() { //called every time a piece move
 }
 
 std::shared_ptr<Piece> Board::GetPiece(uInt posx, uInt posy) {
-    auto clicked = piece_table.at(posx + (posy * 8));
+    uInt ind = GetPieceIndex(posx,posy);
+    auto clicked = piece_table2[ind];
 
     return clicked;
 }
 
 void Board::RemovePieceAt(uInt posx, uInt posy) {
-    piece_table.at(posx+(posy*8)) = nullptr;
+    piece_table2[GetPieceIndex(posx,posy)] = nullptr;
 }
 
 void Board::SetCurrentPiece(std::shared_ptr<Piece> location) {
@@ -108,10 +111,10 @@ void Board::SetCurrentPiece(std::shared_ptr<Piece> location) {
 
 std::vector<int> Board::ReturnPiecesPositions() {
     std::vector<int> positions;
-    for (auto pc: piece_table) {
-        if (pc == nullptr) {
+    for (int i=0; i<64;i++) {
+        if (piece_table2[i] == nullptr) {
             positions.push_back(-1);
-        } else if (pc->GetColor()) {
+        } else if (piece_table2[i]->GetColor()) {
             positions.push_back(1);
         } else {
             positions.push_back(0);
@@ -124,7 +127,7 @@ std::vector<int> Board::ReturnPiecesPositions() {
 
 int Board::PieceAt(uInt posx, uInt posy) {
     //search dictionary for occurrence of a piece at location 0 if not found 1 if found
-    auto pc = piece_table.at((posy * 8) + posx);
+    auto pc = piece_table2[GetPieceIndex(posx, posy)];
 
     if (pc != nullptr) {
         return 1;
@@ -139,7 +142,11 @@ uint Board::CheckForWin() {
 void Board::Castle() {
 
 }
-std::vector<std::shared_ptr<Piece>> Board::ReturnAllPieces() {
-    return piece_table;
+std::unordered_map<uInt, std::shared_ptr<Piece>> Board::ReturnAllPieces() {
+    return piece_table2;
+}
+
+uInt Board::GetPieceIndex(uInt posx, uInt posy) {
+    return posx+(8*posy);
 }
 

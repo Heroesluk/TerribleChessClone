@@ -15,9 +15,14 @@ private:
     std::vector<Piece> pieces;
     std::shared_ptr<Piece> currently_held_piece;
     std::vector<std::shared_ptr<Piece>>piece_table;
+
+    std::unordered_map<uInt,std::shared_ptr<Piece>> piece_table2;
+
     bool moved;
 
 public:
+    uInt GetPieceIndex(uInt posx, uInt posy);
+
     std::shared_ptr<Piece> GetPiece(uInt posx, uInt posy);
 
     bool MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_move);
@@ -36,7 +41,7 @@ public:
 
     uInt CheckForWin();
     void Castle();
-    std::vector<std::shared_ptr<Piece>> ReturnAllPieces();
+    std::unordered_map<uInt,std::shared_ptr<Piece>> ReturnAllPieces();
     uInt CheckForCheck();
 
 };
