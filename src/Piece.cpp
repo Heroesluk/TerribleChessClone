@@ -5,11 +5,7 @@
 #include "Piece.h"
 #include "algorithm"
 
-Piece::Piece(uInt pos_x, uInt pos_y, bool color) {
-    this->pos_x = pos_x;
-    this->pos_y = pos_y;
-    this->color = color;
-}
+Piece::Piece(uInt pos_x, uInt pos_y, bool color): pos_x{pos_x}, pos_y{pos_y}, color{color} {}
 
 std::vector<std::tuple<int, int>> Piece::LegalMoves() {
     int direction;
