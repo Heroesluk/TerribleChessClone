@@ -38,13 +38,13 @@ void Board::SetupBoardPieces() {
 bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_move) {
     //function returns true if it makes any real movement on the board
     //swapping held piece does not count
+    bool made_move = false;
 
 
     auto pc_at_click = GetPiece(board_cursorX, board_cursorY);
 
     if (pc_at_click != nullptr) {
-        if (currently_held_piece == nullptr &&
-            pc_at_click->GetColor() == color_to_move) { //set a held piece if not holding anything
+        if (currently_held_piece == nullptr && pc_at_click->GetColor() == color_to_move) { //set a held piece if not holding anything
             SetCurrentPiece(pc_at_click);
         } else if (currently_held_piece != nullptr) {
             if (pc_at_click->GetColor() ==
@@ -55,8 +55,7 @@ bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_mov
                     currently_held_piece->Move(board_cursorX, board_cursorY);
                     SetCurrentPiece(nullptr);
                     RemovePieceAt(board_cursorX, board_cursorY);
-                    UpdateTable();
-                    return true;
+                    made_move =  true;
 
 
                 }
@@ -70,15 +69,14 @@ bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_mov
             if (currently_held_piece->CheckIfLegalMove(board_cursorX, board_cursorY)) {
                 currently_held_piece->Move(board_cursorX, board_cursorY);
                 SetCurrentPiece(nullptr);
-                UpdateTable();
-                return true;
+                made_move = true;
             }
         }
     }
 
 
     UpdateTable();
-    return false;
+    return made_move;
 
 }
 

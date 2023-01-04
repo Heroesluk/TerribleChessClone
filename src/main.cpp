@@ -28,9 +28,18 @@ void print (const std::tuple<T...>& _tup)
 
 int main() {
 
-    Game game;
+//    Game game;
+//
+//    game.GameLoop();
 
-    game.GameLoop();
+    Board board;
+    board.SetupBoardPieces();
+
+    auto pc = board.GetPiece(0,7);
+    for(auto mv: pc->LegalMoves()){
+        std::cout<<mv<<" ";
+    }
+    std::cout<<std::endl;
 
 
 
