@@ -21,10 +21,10 @@ public:
     Piece(uInt pos_x, uInt pos_y, bool color);
 
     std::vector<uInt> LegalMoves();
-    bool CheckIfLegalMove(uInt posx, uInt posy);
+    bool CheckIfLegalMove(uInt moveX, uInt moveY);
 
-    std::vector<std::tuple<int, int>> LegalTakes();
-    bool CheckIfLegalTake();
+    std::vector<int> LegalTakes();
+    bool CheckIfLegalTake(uInt takeX, uInt takeY);
 
     void Move(uInt pos_x, uInt pos_y);
     bool GetColor();

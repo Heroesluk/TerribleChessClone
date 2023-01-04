@@ -38,7 +38,7 @@ bool Piece::CheckIfLegalMove(uInt posx, uInt posy){
 }
 
 
-std::vector<std::tuple<int, int>> Piece::LegalTakes() {
+std::vector<int> Piece::LegalTakes() {
 
     int direction;
     if(color){
@@ -47,13 +47,26 @@ std::vector<std::tuple<int, int>> Piece::LegalTakes() {
         direction = -1;
     }
 
-    std::vector<std::tuple<int,int>> moves;
-    moves.emplace_back(pos_x+1, pos_y+(direction));
-    moves.emplace_back(pos_x-1, pos_y+(direction));
+    std::vector<int> moves;
+    moves.emplace_back(pos_x+1 + ((pos_y+direction)*8));
+    moves.emplace_back(pos_x-1 + ((pos_y+direction)*8));
 
 
     return moves;
 }
+
+bool Piece::CheckIfLegalTake(uInt takeX, uInt takeY) {
+    auto legal_takes = LegalTakes();
+
+    for(auto take_index: legal_takes){
+        if(take_index==takeX+(takeY*8)){
+
+            return true;
+        }
+    }
+
+}
+
 
 bool Piece::GetColor(){
     return color;
