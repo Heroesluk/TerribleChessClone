@@ -8,31 +8,31 @@ void Board::SetupBoardPieces() {
     std::vector<Piece> pieces;
 
     pieces.emplace_back(Pawn(0, 0, true));
-    pieces.emplace_back(Pawn(1, 0, true));
-    pieces.emplace_back(Pawn(2, 0, true));
-    pieces.emplace_back(Pawn(3, 0, true));
-    pieces.emplace_back(Pawn(4, 0, true));
-    pieces.emplace_back(Pawn(5, 0, true));
-    pieces.emplace_back(Pawn(6, 0, true));
-    pieces.emplace_back(Pawn(7, 0, true));
-    pieces.emplace_back(Pawn(0, 7, false));
-    pieces.emplace_back(Pawn(1, 7, false));
-    pieces.emplace_back(Pawn(2, 7, false));
-    pieces.emplace_back(Pawn(3, 7, false));
-    pieces.emplace_back(Pawn(4, 7, false));
-    pieces.emplace_back(Pawn(5, 7, false));
-    pieces.emplace_back(Pawn(6, 7, false));
-    pieces.emplace_back(Pawn(7, 7, false));
+    piece_table2[0] = std::make_shared<Pawn>(0, 0, true);
+
+    piece_table2[1] = std::make_shared<Pawn>(1, 0, true);
+    piece_table2[2] = std::make_shared<Pawn>(2, 0, true);
+    piece_table2[3] = std::make_shared<Pawn>(3, 0, true);
+    piece_table2[4] = std::make_shared<Pawn>(4, 0, true);
+    piece_table2[5] = std::make_shared<Pawn>(5, 0, true);
+    piece_table2[6] = std::make_shared<Pawn>(6, 0, true);
+    piece_table2[7] = std::make_shared<Pawn>(7, 0, true);
+    piece_table2[56] = std::make_shared<Pawn>(0, 7, false);
+    piece_table2[57] = std::make_shared<Pawn>(1, 7, false);
+    piece_table2[58] = std::make_shared<Pawn>(2, 7, false);
+    piece_table2[59] = std::make_shared<Pawn>(3, 7, false);
+    piece_table2[60] = std::make_shared<Pawn>(4, 7, false);
+    piece_table2[61] = std::make_shared<Pawn>(5, 7, false);
+    piece_table2[62] = std::make_shared<Pawn>(6, 7, false);
+    piece_table2[63] = std::make_shared<Pawn>(7, 7, false);
 
     for (int i = 0; i < 64; i++) {
         piece_table2.emplace(i, nullptr);
     }
 
-    for (auto pc: pieces) {
-        auto index = pc.GetPosIndex();
-        piece_table2[index] = std::make_shared<Piece>(pc);
 
-    }
+
+
 
     currently_held_piece = nullptr;
 }
