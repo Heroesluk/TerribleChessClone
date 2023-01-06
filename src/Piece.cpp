@@ -7,23 +7,11 @@
 
 Piece::Piece(uInt pos_x, uInt pos_y, bool color): pos_x{pos_x}, pos_y{pos_y}, color{color} {}
 
-std::vector<uInt> Piece::LegalMoves() {
-    int direction;
-    if(color){
-        direction = 1;
-    } else{
-        direction = -1;
-    }
-
-    std::vector<uInt> moves;
-    moves.emplace_back(pos_x+(8*(pos_y+direction)));
-
-    return moves;
-}
+std::vector<uInt> Piece::LegalMoves() {};
 
 bool Piece::CheckIfLegalMove(uInt posx, uInt posy){
 
-    auto moves = this->LegalMoves();
+    auto moves = legal_moves;
 
     for(auto move_index: moves){
         if(move_index==posx+(posy*8)){

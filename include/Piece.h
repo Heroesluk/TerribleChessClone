@@ -16,6 +16,8 @@ protected:
     bool color;
     uInt pos_x;
     uInt pos_y;
+    std::vector<uInt> legal_moves;
+
 public:
     Piece(uInt pos_x, uInt pos_y, bool color);
 
