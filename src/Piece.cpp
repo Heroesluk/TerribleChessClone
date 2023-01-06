@@ -22,7 +22,8 @@ std::vector<uInt> Piece::LegalMoves() {
 }
 
 bool Piece::CheckIfLegalMove(uInt posx, uInt posy){
-    auto moves = LegalMoves();
+
+    auto moves = this->LegalMoves();
 
     for(auto move_index: moves){
         if(move_index==posx+(posy*8)){
