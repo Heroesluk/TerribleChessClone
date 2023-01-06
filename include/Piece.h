@@ -23,7 +23,7 @@ public:
 
     virtual std::vector<uInt> LegalMoves()=0;
 
-    virtual bool CheckIfLegalMove(uInt moveX, uInt moveY)=0;
+    bool CheckIfLegalMove(uInt moveX, uInt moveY);
 
     std::vector<int> LegalTakes();
 

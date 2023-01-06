@@ -51,3 +51,17 @@ uInt Piece::GetPosIndex() {
     return pos_x+(8*pos_y);
 }
 
+bool Piece::CheckIfLegalMove(uInt moveX, uInt moveY) {
+
+    auto moves = legal_moves;
+    for (auto move_index: moves) {
+        if (move_index == moveX + (moveY * 8)) {
+            return true;
+        }
+    }
+
+
+    return false;
+
+}
+
