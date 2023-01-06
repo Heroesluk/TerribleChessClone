@@ -16,7 +16,6 @@ protected:
     bool color;
     uInt pos_x;
     uInt pos_y;
-    uInt board_index;
 public:
     Piece(uInt pos_x, uInt pos_y, bool color);
 

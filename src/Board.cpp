@@ -5,6 +5,8 @@
 #include "Pawn.h"
 void Board::SetupBoardPieces() {
 
+    std::vector<Piece> pieces;
+
     pieces.emplace_back(Pawn(0, 0, true));
     pieces.emplace_back(Pawn(1, 0, true));
     pieces.emplace_back(Pawn(2, 0, true));
@@ -147,7 +149,7 @@ void Board::Castle() {
 
 }
 
-std::unordered_map<uInt, std::shared_ptr<Piece>> Board::ReturnAllPieces() {
+const std::unordered_map<uInt, std::shared_ptr<Piece>> Board::ReturnAllPieces() {
     return piece_table2;
 }
 

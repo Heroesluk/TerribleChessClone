@@ -11,7 +11,6 @@ void Game::ClickToBoardCoords(uInt mouse_x, uInt mouse_y) {
 Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "My window") {
 
     board.SetupBoardPieces();
-    current_player = true;
 
 }
 
@@ -35,13 +34,13 @@ void Game::Draw(const std::vector<int> &pieces_locations, sf::RenderWindow &Wind
 
     }
 
-    for (int ind = 0; ind<pieces_locations.size(); ind++) {
+    for (int ind = 0; ind < pieces_locations.size(); ind++) {
         if (pieces_locations[ind] != -1) {
             sf::RectangleShape piece_sprite(sf::Vector2f(PIECE_WIDTH, PIECE_HEIGHT));
-            int y = floor(ind/8);
-            int x = ind%8;
+            int y = floor(ind / 8);
+            int x = ind % 8;
             piece_sprite.setPosition(x * PIECE_WIDTH, y * PIECE_WIDTH);
-            if (pieces_locations[ind]==1) {
+            if (pieces_locations[ind] == 1) {
                 piece_sprite.setFillColor(colors.white_piece);
             } else piece_sprite.setFillColor(colors.black_piece);
             Window.draw(piece_sprite);
@@ -63,11 +62,10 @@ void Game::GameLoop() {
                 //
                 ClickToBoardCoords(event.mouseButton.x, event.mouseButton.y);
 
-                bool moved = board.MakeAction(boardX, boardY, turn%2);
-                if(moved){
-                    turn+=1;
+                bool moved = board.MakeAction(boardX, boardY, turn % 2);
+                if (moved) {
+                    turn += 1;
                 }
-
 
 
             }
