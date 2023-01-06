@@ -45,10 +45,7 @@ bool Piece::GetColor(){
     return color;
 }
 
-void Piece::Move(uInt posx, uInt posy) {
-    pos_x = posx;
-    pos_y = posy;
-}
+
 
 uInt Piece::GetPosIndex() {
     return pos_x+(8*pos_y);

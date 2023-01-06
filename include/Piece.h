@@ -29,7 +29,7 @@ public:
 
     bool CheckIfLegalTake(uInt takeX, uInt takeY);
 
-    void Move(uInt pos_x, uInt pos_y);
+    virtual void Move(uInt pos_x, uInt pos_y) = 0;
 
     bool GetColor();
 
