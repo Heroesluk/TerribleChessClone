@@ -59,7 +59,6 @@ bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_mov
 
                 }
 
-
             }
         }
 

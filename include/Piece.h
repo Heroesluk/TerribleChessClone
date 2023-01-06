@@ -25,7 +25,7 @@ public:
 
     bool CheckIfLegalMove(uInt moveX, uInt moveY);
 
-    std::vector<int> LegalTakes();
+    virtual std::vector<int> LegalTakes() = 0;
 
     bool CheckIfLegalTake(uInt takeX, uInt takeY);
 

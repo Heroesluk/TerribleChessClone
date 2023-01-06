@@ -11,22 +11,7 @@ Piece::Piece(uInt pos_x, uInt pos_y, bool color): pos_x{pos_x}, pos_y{pos_y}, co
 
 
 
-std::vector<int> Piece::LegalTakes() {
 
-    int direction;
-    if(color){
-        direction = 1;
-    } else{
-        direction = -1;
-    }
-
-    std::vector<int> moves;
-    moves.emplace_back(pos_x+1 + ((pos_y+direction)*8));
-    moves.emplace_back(pos_x-1 + ((pos_y+direction)*8));
-
-
-    return moves;
-}
 
 bool Piece::CheckIfLegalTake(uInt takeX, uInt takeY) {
     auto legal_takes = LegalTakes();
@@ -37,6 +22,8 @@ bool Piece::CheckIfLegalTake(uInt takeX, uInt takeY) {
             return true;
         }
     }
+
+    return false;
 
 }
 
@@ -54,6 +41,7 @@ uInt Piece::GetPosIndex() {
 bool Piece::CheckIfLegalMove(uInt moveX, uInt moveY) {
 
     auto moves = legal_moves;
+
     for (auto move_index: moves) {
         if (move_index == moveX + (moveY * 8)) {
             return true;
