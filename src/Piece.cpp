@@ -9,22 +9,6 @@ Piece::Piece(uInt pos_x, uInt pos_y, bool color): pos_x{pos_x}, pos_y{pos_y}, co
 
 //std::vector<uInt> Piece::LegalMoves() {};
 
-bool Piece::CheckIfLegalMove(uInt posx, uInt posy){
-
-    auto moves = legal_moves;
-
-    for(auto move_index: moves){
-        if(move_index==posx+(posy*8)){
-
-
-            return true;
-        }
-    }
-
-    return false;
-
-
-}
 
 
 std::vector<int> Piece::LegalTakes() {
