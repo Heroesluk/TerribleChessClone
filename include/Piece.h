@@ -21,7 +21,7 @@ protected:
 public:
     Piece(uInt pos_x, uInt pos_y, bool color);
 
-    virtual std::vector<uInt> LegalMoves();
+    virtual std::vector<uInt> LegalMoves()=0;
 
     bool CheckIfLegalMove(uInt moveX, uInt moveY);
 

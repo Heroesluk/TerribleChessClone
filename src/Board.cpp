@@ -5,11 +5,8 @@
 #include "Pawn.h"
 void Board::SetupBoardPieces() {
 
-    std::vector<Piece> pieces;
 
-    pieces.emplace_back(Pawn(0, 0, true));
     piece_table2[0] = std::make_shared<Pawn>(0, 0, true);
-
     piece_table2[1] = std::make_shared<Pawn>(1, 0, true);
     piece_table2[2] = std::make_shared<Pawn>(2, 0, true);
     piece_table2[3] = std::make_shared<Pawn>(3, 0, true);
