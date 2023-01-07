@@ -79,8 +79,23 @@ std::vector<uInt> Rook::LegalTakes(std::vector<int> pieces_positions) {
         }
     }
 
+    for (int x = pos_x; x < 8; x++) {
+        if(pieces_positions[x + (8*pos_y)]!=-1){
+            if(pieces_positions[x+(8*pos_y)]!=color){
+                moves.emplace_back(x + (8 * (pos_y)));
+                break;
+            }
+        }
+    }
 
-
+    for (int x = pos_x; x>=0; x--) {
+        if(pieces_positions[x + (8*pos_y)]!=-1){
+            if(pieces_positions[x+(8*pos_y)]!=color){
+                moves.emplace_back(x + (8 * (pos_y)));
+                break;
+            }
+        }
+    }
 
 
     return moves;
