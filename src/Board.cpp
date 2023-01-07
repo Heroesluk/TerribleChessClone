@@ -170,7 +170,8 @@ bool Board::CheckIfLegalMove(uInt moveX, uInt moveY){
 
 
 bool Board::CheckIfLegalTake(uInt takeX, uInt takeY) {
-    auto takes = currently_held_piece->LegalTakes(std::vector<int>());
+
+    auto takes = currently_held_piece->LegalTakes(ReturnPiecesPositions());
 
     for (auto take_index: takes) {
         if (take_index == takeX + (takeY * 8)) {

@@ -15,21 +15,15 @@ class Piece {
 protected:
     bool color;
 
-    std::vector<uInt> legal_moves;
-
 public:
     uInt pos_x;
     uInt pos_y;
 
     Piece(uInt pos_x, uInt pos_y, bool color);
 
-    void UpdateLegalMoves();
-
     virtual std::vector<uInt> LegalMoves(std::vector<int> pieces_positions) =0;
 
-    virtual std::vector<int> LegalTakes(std::vector<int> pieces_positions) = 0;
-
-    bool CheckIfLegalTake(uInt takeX, uInt takeY);
+    virtual std::vector<uInt> LegalTakes(std::vector<int> pieces_positions) = 0;
 
     virtual void Move(uInt pos_x, uInt pos_y) = 0;
 
