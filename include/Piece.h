@@ -14,14 +14,18 @@ using uInt = unsigned int;
 class Piece {
 protected:
     bool color;
-    uInt pos_x;
-    uInt pos_y;
+
     std::vector<uInt> legal_moves;
 
 public:
+    uInt pos_x;
+    uInt pos_y;
+
     Piece(uInt pos_x, uInt pos_y, bool color);
 
-    virtual std::vector<uInt> LegalMoves()=0;
+    void UpdateLegalMoves();
+
+    virtual std::vector<uInt> LegalMoves(std::vector<int> pieces_positions) =0;
 
     bool CheckIfLegalMove(uInt moveX, uInt moveY);
 

@@ -35,6 +35,9 @@ public:
     std::shared_ptr<Piece> GetPiece(uInt posx, uInt posy);
     //
 
+    bool CheckIfLegalMove(uInt moveX, uInt moveY);
+
+
     void SetupBoardPieces();
     bool MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_move);
     std::vector<int> ReturnPiecesPositions();

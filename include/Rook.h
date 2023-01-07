@@ -13,7 +13,7 @@ class Rook: public Piece{
 public:
     Rook(uInt posx, uInt posy, bool color);
 
-    std::vector<uInt> LegalMoves() override;
+    std::vector<uInt> LegalMoves(std::vector<int> pieces_positions) override;
     std::vector<int> LegalTakes() override;
 
     void Move(uInt pos_x, uInt pos_y) override;

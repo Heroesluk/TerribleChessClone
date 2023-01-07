@@ -4,10 +4,10 @@
 #include "Rook.h"
 
 Rook::Rook(uInt posx, uInt posy, bool color) : Piece(posx, posy, color) {
-    legal_moves = Rook::LegalMoves();
+    legal_moves = Rook::LegalMoves(std::vector<int>());
 }
 
-std::vector<uInt> Rook::LegalMoves() {
+std::vector<uInt> Rook::LegalMoves(std::vector<int> pieces_positions) {
     int direction;
     if(color){
         direction = 1;
@@ -41,6 +41,6 @@ std::vector<int> Rook::LegalTakes() {
 void Rook::Move(uInt posX, uInt posY) {
     pos_x = posX;
     pos_y = posY;
-    legal_moves = Rook::LegalMoves();
+    legal_moves = Rook::LegalMoves(std::vector<int>());
 }
 

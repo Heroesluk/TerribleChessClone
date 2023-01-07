@@ -62,7 +62,7 @@ bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_mov
 
     } else if (currently_held_piece != nullptr) {
         if (currently_held_piece->GetColor() == color_to_move) { //move piece to empty square
-            if (currently_held_piece->CheckIfLegalMove(board_cursorX, board_cursorY)) {
+            if (CheckIfLegalMove(board_cursorX, board_cursorY)) {
                 currently_held_piece->Move(board_cursorX, board_cursorY);
                 SetCurrentPiece(nullptr);
                 made_move = true;
@@ -106,6 +106,8 @@ void Board::SetCurrentPiece(std::shared_ptr<Piece> location) {
     currently_held_piece = std::move(location);
 
 }
+
+
 
 std::vector<int> Board::ReturnPiecesPositions() {
     std::vector<int> positions;
@@ -151,3 +153,17 @@ uInt Board::GetPieceIndex(uInt posx, uInt posy) {
     return posx + (8 * posy);
 }
 
+bool Board::CheckIfLegalMove(uInt moveX, uInt moveY){
+    auto moves = currently_held_piece->LegalMoves(ReturnPiecesPositions());
+
+    for (auto move_index: moves) {
+        if (move_index == moveX + (moveY * 8)) {
+            return true;
+        }
+    }
+
+
+    return false;
+
+
+}
