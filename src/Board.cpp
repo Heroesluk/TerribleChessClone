@@ -48,7 +48,7 @@ bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_mov
                 currently_held_piece->GetColor()) { //swap currently held piece if matches held piece
                 SetCurrentPiece(pc_at_click);
             } else if (currently_held_piece->GetColor() == color_to_move) { //take an enemy piece, replace with own
-                if (currently_held_piece->CheckIfLegalTake(board_cursorX, board_cursorY)) {
+                if (CheckIfLegalTake(board_cursorX, board_cursorY)) {
                     currently_held_piece->Move(board_cursorX, board_cursorY);
                     SetCurrentPiece(nullptr);
                     RemovePieceAt(board_cursorX, board_cursorY);
@@ -165,5 +165,20 @@ bool Board::CheckIfLegalMove(uInt moveX, uInt moveY){
 
     return false;
 
+
+}
+
+
+bool Board::CheckIfLegalTake(uInt takeX, uInt takeY) {
+    auto takes = currently_held_piece->LegalTakes(std::vector<int>());
+
+    for (auto take_index: takes) {
+        if (take_index == takeX + (takeY * 8)) {
+
+            return true;
+        }
+    }
+
+    return false;
 
 }

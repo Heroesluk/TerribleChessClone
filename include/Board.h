@@ -36,6 +36,7 @@ public:
     //
 
     bool CheckIfLegalMove(uInt moveX, uInt moveY);
+    bool CheckIfLegalTake(uInt takeX, uInt takeY);
 
 
     void SetupBoardPieces();

@@ -27,9 +27,7 @@ public:
 
     virtual std::vector<uInt> LegalMoves(std::vector<int> pieces_positions) =0;
 
-    bool CheckIfLegalMove(uInt moveX, uInt moveY);
-
-    virtual std::vector<int> LegalTakes() = 0;
+    virtual std::vector<int> LegalTakes(std::vector<int> pieces_positions) = 0;
 
     bool CheckIfLegalTake(uInt takeX, uInt takeY);
 

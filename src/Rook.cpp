@@ -23,7 +23,7 @@ std::vector<uInt> Rook::LegalMoves(std::vector<int> pieces_positions) {
 
 }
 
-std::vector<int> Rook::LegalTakes() {
+std::vector<int> Rook::LegalTakes(std::vector<int> pieces_positions) {
     int direction;
     if(color){
         direction = 1;
