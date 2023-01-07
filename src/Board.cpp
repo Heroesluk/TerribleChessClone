@@ -5,6 +5,7 @@
 #include "Pawn.h"
 #include "Rook.h"
 #include "Bishop.h"
+#include "Queen.h"
 void Board::SetupBoardPieces() {
 
 
@@ -13,18 +14,18 @@ void Board::SetupBoardPieces() {
     piece_table2[1] = std::make_shared<Pawn>(1, 0, true);
     piece_table2[2] = std::make_shared<Bishop>(2, 0, true);
     piece_table2[3] = std::make_shared<Pawn>(3, 0, true);
-    piece_table2[4] = std::make_shared<Pawn>(4, 0, true);
-    piece_table2[5] = std::make_shared<Pawn>(5, 0, true);
+    piece_table2[4] = std::make_shared<Queen>(4, 0, true);
+    piece_table2[5] = std::make_shared<Bishop>(5, 0, true);
     piece_table2[6] = std::make_shared<Pawn>(6, 0, true);
-    piece_table2[7] = std::make_shared<Pawn>(7, 0, true);
+    piece_table2[7] = std::make_shared<Rook>(7, 0, true);
     piece_table2[56] = std::make_shared<Rook>(0, 7, false);
     piece_table2[57] = std::make_shared<Pawn>(1, 7, false);
     piece_table2[58] = std::make_shared<Bishop>(2, 7, false);
     piece_table2[59] = std::make_shared<Pawn>(3, 7, false);
-    piece_table2[60] = std::make_shared<Pawn>(4, 7, false);
-    piece_table2[61] = std::make_shared<Pawn>(5, 7, false);
+    piece_table2[60] = std::make_shared<Queen>(4, 7, false);
+    piece_table2[61] = std::make_shared<Bishop>(5, 7, false);
     piece_table2[62] = std::make_shared<Pawn>(6, 7, false);
-    piece_table2[63] = std::make_shared<Pawn>(7, 7, false);
+    piece_table2[63] = std::make_shared<Rook>(7, 7, false);
 
     for (int i = 0; i < 64; i++) {
         piece_table2.emplace(i, nullptr);

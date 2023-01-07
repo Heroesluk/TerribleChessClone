@@ -1,25 +1,56 @@
 //
-// Created by heroesluk on 06.01.23.
+// Created by heroesluk on 07.01.23.
 //
-#include "Rook.h"
+#include "Queen.h"
 
-Rook::Rook(uInt posx, uInt posy, bool color) : Piece(posx, posy, color) {
-    std::vector<int> default_moves = {1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1,
-                                      -1, -1, -1, -1, -1, -1, -1, -1,
-                                      -1, -1, -1, -1, -1, -1, -1, -1,
-                                      -1, -1, -1, -1, -1, -1, -1, -1,
-                                      -1, -1, -1, -1, -1, -1, -1, -1,
-                                      -1, -1, -1, -1, -1, -1, -1, -1,
-                                      0, 0, 0, 0, 0, 0, 0, 0};
+Queen::Queen(uInt posx, uInt posy, bool color) : Piece(posx, posy, color) {
+
 }
 
-std::vector<uInt> Rook::LegalMoves(std::vector<int> pieces_positions) {
-
-    //0 -> 1 -> 2 -> 3
-    // 3 -> 4 -> 5 -> 6
-    // 3 -> 2 -> 1 -> 0
-
+std::vector<uInt> Queen::LegalMoves(std::vector<int> pieces_positions) {
     std::vector<uInt> moves;
+
+    {
+        int x = pos_x;
+        int y = pos_y;
+
+        while (x < 7 && y < 7) {
+            x++;
+            y++;
+            moves.emplace_back(x + (y * 8));
+        }
+
+    };
+    {
+        int x = pos_x;
+        int y = pos_y;
+        while (x > 0 && y > 0) {
+            x--;
+            y--;
+            moves.emplace_back(x + (y * 8));
+        }
+
+    };
+    {
+        int x = pos_x;
+        int y = pos_y;
+        while (x > 0 && y < 7) {
+            x--;
+            y++;
+            moves.emplace_back(x + (y * 8));
+        }
+
+    };
+    {
+        int x = pos_x;
+        int y = pos_y;
+        while (x < 7 && y > 0) {
+            x++;
+            y--;
+            moves.emplace_back(x + (y * 8));
+        }
+
+    };
 
     for (int y = pos_y; y < 8; y++) {
         if(pieces_positions[pos_x + (8*y)]!=-1 && pos_y!=y){
@@ -49,17 +80,55 @@ std::vector<uInt> Rook::LegalMoves(std::vector<int> pieces_positions) {
         moves.emplace_back(x + (8 * (pos_y)));
     }
 
+
     return moves;
 
 }
 
-std::vector<uInt> Rook::LegalTakes(std::vector<int> pieces_positions) {
-
-
-    //color = pieces_positions[pos_x+(8*pos_y)];
-
+std::vector<uInt> Queen::LegalTakes(std::vector<int> pieces_positions) {
     std::vector<uInt> moves;
 
+    {
+        int x = pos_x;
+        int y = pos_y;
+
+        while (x < 7 && y < 7) {
+            x++;
+            y++;
+            moves.emplace_back(x + (y * 8));
+        }
+
+    };
+    {
+        int x = pos_x;
+        int y = pos_y;
+        while (x > 0 && y > 0) {
+            x--;
+            y--;
+            moves.emplace_back(x + (y * 8));
+        }
+
+    };
+    {
+        int x = pos_x;
+        int y = pos_y;
+        while (x > 0 && y < 7) {
+            x--;
+            y++;
+            moves.emplace_back(x + (y * 8));
+        }
+
+    };
+    {
+        int x = pos_x;
+        int y = pos_y;
+        while (x < 7 && y > 0) {
+            x++;
+            y--;
+            moves.emplace_back(x + (y * 8));
+        }
+
+    }
 
     for (int y = pos_y; y < 8; y++) {
         if(pieces_positions[pos_x + (8*y)]!=-1){
@@ -97,9 +166,7 @@ std::vector<uInt> Rook::LegalTakes(std::vector<int> pieces_positions) {
         }
     }
 
-
     return moves;
+
 }
-
-
 
