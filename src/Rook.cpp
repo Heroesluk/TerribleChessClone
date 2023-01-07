@@ -101,8 +101,5 @@ std::vector<uInt> Rook::LegalTakes(std::vector<int> pieces_positions) {
     return moves;
 }
 
-void Rook::Move(uInt posX, uInt posY) {
-    pos_x = posX;
-    pos_y = posY;
-}
+
 

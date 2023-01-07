@@ -25,7 +25,7 @@ public:
 
     virtual std::vector<uInt> LegalTakes(std::vector<int> pieces_positions) = 0;
 
-    virtual void Move(uInt pos_x, uInt pos_y) = 0;
+    void Move(uInt pos_x, uInt pos_y);
 
     bool GetColor();
 

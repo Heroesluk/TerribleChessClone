@@ -20,4 +20,9 @@ uInt Piece::GetPosIndex() {
     return pos_x+(8*pos_y);
 }
 
+void Piece::Move(uInt moveX, uInt moveY) {
+    pos_x = moveX;
+    pos_y = moveY;
+}
+
 
