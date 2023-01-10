@@ -83,6 +83,18 @@ void Game::Draw(const std::vector<std::shared_ptr<Piece>>& piece_map, sf::Render
         }
     }
 
+    if(board.GetCurrentlyHeld()!= nullptr){
+        for(auto mv: board.GetCurrentlyHeld()->LegalTakes(board.ReturnPiecesPositions())){
+            sf::RectangleShape tile(sf::Vector2f(mv, mv));
+            int y = mv/8;
+            int x = mv%8;
+
+            tile.setPosition((x*PIECE_WIDTH)+PIECE_WIDTH/3, (y*PIECE_HEIGHT)+PIECE_HEIGHT/3);
+            Window.draw(tile);
+
+
+        }
+    }
 
 }
 

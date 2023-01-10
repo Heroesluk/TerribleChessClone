@@ -27,6 +27,7 @@ private:
     uInt CheckForCheck();
 
 
+
 public:
     const std::vector<std::shared_ptr<Piece>>  ReturnAllPieces();
 
@@ -42,6 +43,9 @@ public:
     void SetupBoardPieces();
     bool MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_move);
     std::vector<int> ReturnPiecesPositions();
+
+    std::shared_ptr<Piece> GetCurrentlyHeld();
+
 
 
 

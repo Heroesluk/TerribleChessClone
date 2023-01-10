@@ -217,3 +217,7 @@ bool Board::CheckIfLegalTake(uInt takeX, uInt takeY) {
     return false;
 
 }
+
+std::shared_ptr<Piece> Board::GetCurrentlyHeld() {
+    return currently_held_piece;
+}
