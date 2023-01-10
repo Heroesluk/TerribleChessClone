@@ -28,7 +28,7 @@ private:
 
 
 public:
-    const std::unordered_map<uInt,std::shared_ptr<Piece>> ReturnAllPieces();
+    const std::vector<std::shared_ptr<Piece>>  ReturnAllPieces();
 
     //move this to private once debugged
     uInt GetPieceIndex(uInt posx, uInt posy);

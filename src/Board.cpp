@@ -20,6 +20,20 @@ void Board::SetupBoardPieces() {
     piece_table2[5] = std::make_shared<Bishop>(5, 0, true);
     piece_table2[6] = std::make_shared<Knight>(6, 0, true);
     piece_table2[7] = std::make_shared<Rook>(7, 0, true);
+
+    piece_table2[8] = std::make_shared<Pawn>(0,  1, true);
+    piece_table2[9] = std::make_shared<Pawn>(1,  1, true);
+    piece_table2[10] = std::make_shared<Pawn>(2, 1, true);
+    piece_table2[11] = std::make_shared<Pawn>(3, 1, true);
+    piece_table2[12] = std::make_shared<Pawn>(4, 1, true);
+    piece_table2[13] = std::make_shared<Pawn>(5, 1, true);
+    piece_table2[14] = std::make_shared<Pawn>(6, 1, true);
+    piece_table2[15] = std::make_shared<Pawn>(7, 1, true);
+
+
+
+
+
     piece_table2[56] = std::make_shared<Rook>(0, 7, false);
     piece_table2[57] = std::make_shared<Knight>(1, 7, false);
     piece_table2[58] = std::make_shared<Bishop>(2, 7, false);
@@ -28,6 +42,16 @@ void Board::SetupBoardPieces() {
     piece_table2[61] = std::make_shared<Bishop>(5, 7, false);
     piece_table2[62] = std::make_shared<Knight>(6, 7, false);
     piece_table2[63] = std::make_shared<Rook>(7, 7, false);
+
+    piece_table2[48] = std::make_shared<Pawn>(0,  6, false);
+    piece_table2[49] = std::make_shared<Pawn>(1,  6, false);
+    piece_table2[50] = std::make_shared<Pawn>(2, 6, false);
+    piece_table2[51] = std::make_shared<Pawn>(3, 6, false);
+    piece_table2[52] = std::make_shared<Pawn>(4, 6, false);
+    piece_table2[53] = std::make_shared<Pawn>(5, 6, false);
+    piece_table2[54] = std::make_shared<Pawn>(6, 6, false);
+    piece_table2[55] = std::make_shared<Pawn>(7, 6, false);
+
 
     for (int i = 0; i < 64; i++) {
         piece_table2.emplace(i, nullptr);
@@ -150,8 +174,13 @@ void Board::Castle() {
 
 }
 
-const std::unordered_map<uInt, std::shared_ptr<Piece>> Board::ReturnAllPieces() {
-    return piece_table2;
+const std::vector<std::shared_ptr<Piece>> Board::ReturnAllPieces() {
+    std::vector<std::shared_ptr<Piece>> pieces;
+    for(auto pair: piece_table2){
+        pieces.push_back(pair.second);
+    }
+
+    return pieces;
 }
 
 uInt Board::GetPieceIndex(uInt posx, uInt posy) {

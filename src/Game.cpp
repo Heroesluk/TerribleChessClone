@@ -14,7 +14,7 @@ Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "My window") {
 
 }
 
-void Game::Draw(const std::vector<int> &pieces_locations, sf::RenderWindow &Window) {
+void Game::Draw(std::vector<std::shared_ptr<Piece>> piece_map, sf::RenderWindow &Window) {
     ColorPalette colors(sf::Color(102, 204, 102),
                         sf::Color(255, 243, 230),
                         sf::Color(255, 43, 103),
@@ -34,20 +34,21 @@ void Game::Draw(const std::vector<int> &pieces_locations, sf::RenderWindow &Wind
 
     }
 
-    for (int ind = 0; ind < pieces_locations.size(); ind++) {
-        if (pieces_locations[ind] != -1) {
+    for (auto &it: piece_map) {
+        if (it != nullptr) {
             sf::RectangleShape piece_sprite(sf::Vector2f(PIECE_WIDTH, PIECE_HEIGHT));
-            int y = floor(ind / 8);
-            int x = ind % 8;
+            int y = it->pos_y;
+            int x = it->pos_x;
             piece_sprite.setPosition(x * PIECE_WIDTH, y * PIECE_WIDTH);
-            if (pieces_locations[ind] == 1) {
+            if (it->GetColor()) {
                 piece_sprite.setFillColor(colors.white_piece);
             } else piece_sprite.setFillColor(colors.black_piece);
             Window.draw(piece_sprite);
 
         }
-
     }
+
+
 }
 
 void Game::GameLoop() {
@@ -72,8 +73,8 @@ void Game::GameLoop() {
         }
 
         window.clear();
-
-        Draw(board.ReturnPiecesPositions(), window);
+        
+        Draw(board.ReturnAllPieces(), window);
 
         window.display();
     }

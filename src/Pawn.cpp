@@ -30,6 +30,9 @@ std::vector<uInt> Pawn::LegalMoves(std::vector<int> pieces_positions) {
     }
 
     moves.emplace_back(pos_x + (8 * (pos_y + direction)));
+    if(!moved){ //pawn can move 2 blocks if didnt move previously
+        moves.emplace_back(pos_x + (8 * (pos_y + (2*direction))));
+    }
 
 
     return moves;

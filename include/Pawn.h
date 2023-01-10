@@ -11,6 +11,9 @@ using uInt = unsigned int;
 
 
 class Pawn : public Piece {
+private:
+    bool moved;
+
 public:
 
     Pawn(uInt posx, uInt posy, bool color);
