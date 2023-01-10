@@ -9,46 +9,40 @@ Bishop::Bishop(uInt posx, uInt posy, bool color, std::string piece_name) : Piece
 std::vector<uInt> Bishop::LegalMoves(std::vector<int> pieces_positions) {
     std::vector<uInt> moves;
 
-    {
-        int x = pos_x;
-        int y = pos_y;
 
-        while (x < 7 && y < 7) {
-            x++;
-            y++;
-            moves.emplace_back(x + (y * 8));
-        }
+    uInt x = pos_x;
+    uInt y = pos_y;
 
-    };
-    {
-        int x = pos_x;
-        int y = pos_y;
-        while (x > 0 && y > 0) {
-            x--;
-            y--;
-            moves.emplace_back(x + (y * 8));
-        }
+    while (x < 7 && y < 7) {
+        x++;
+        y++;
+        moves.emplace_back(x + (y * 8));
+    }
 
-    };
-    {
-        int x = pos_x;
-        int y = pos_y;
-        while (x > 0 && y < 7) {
-            x--;
-            y++;
-            moves.emplace_back(x + (y * 8));
-        }
 
-    };
-    {
-        int x = pos_x;
-        int y = pos_y;
-        while (x < 7 && y > 0) {
-            x++;
-            y--;
-            moves.emplace_back(x + (y * 8));
-        }
+    x = pos_x;
+    y = pos_y;
+    while (x > 0 && y > 0) {
+        x--;
+        y--;
+        moves.emplace_back(x + (y * 8));
+    }
 
+
+    x = pos_x;
+    y = pos_y;
+    while (x > 0 && y < 7) {
+        x--;
+        y++;
+        moves.emplace_back(x + (y * 8));
+    }
+
+    x = pos_x;
+    y = pos_y;
+    while (x < 7 && y > 0) {
+        x++;
+        y--;
+        moves.emplace_back(x + (y * 8));
     }
 
 
@@ -60,46 +54,41 @@ std::vector<uInt> Bishop::LegalMoves(std::vector<int> pieces_positions) {
 std::vector<uInt> Bishop::LegalTakes(std::vector<int> pieces_positions) {
     std::vector<uInt> moves;
 
-    {
-        int x = pos_x;
-        int y = pos_y;
 
-        while (x < 7 && y < 7) {
-            x++;
-            y++;
-            moves.emplace_back(x + (y * 8));
-        }
+    uInt x = pos_x;
+    uInt y = pos_y;
 
-    };
-    {
-        int x = pos_x;
-        int y = pos_y;
-        while (x > 0 && y > 0) {
-            x--;
-            y--;
-            moves.emplace_back(x + (y * 8));
-        }
+    while (x < 7 && y < 7) {
+        x++;
+        y++;
+        moves.emplace_back(x + (y * 8));
+    }
 
-    };
-    {
-        int x = pos_x;
-        int y = pos_y;
-        while (x > 0 && y < 7) {
-            x--;
-            y++;
-            moves.emplace_back(x + (y * 8));
-        }
 
-    };
-    {
-        int x = pos_x;
-        int y = pos_y;
-        while (x < 7 && y > 0) {
-            x++;
-            y--;
-            moves.emplace_back(x + (y * 8));
-        }
+    x = pos_x;
+    y = pos_y;
+    while (x > 0 && y > 0) {
+        x--;
+        y--;
+        moves.emplace_back(x + (y * 8));
+    }
 
+
+    x = pos_x;
+    y = pos_y;
+    while (x > 0 && y < 7) {
+        x--;
+        y++;
+        moves.emplace_back(x + (y * 8));
+    }
+
+
+    x = pos_x;
+    y = pos_y;
+    while (x < 7 && y > 0) {
+        x++;
+        y--;
+        moves.emplace_back(x + (y * 8));
     }
 
 
