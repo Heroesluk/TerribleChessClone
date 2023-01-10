@@ -3,6 +3,7 @@ project(Chess)
 
 set(CMAKE_CXX_STANDARD 17)
 
+
 set(SOURCE_FILES
         include/Piece.h
         include/Game.h

@@ -14,7 +14,12 @@ Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "My window") {
 
 }
 
-void Game::Draw(std::vector<std::shared_ptr<Piece>> piece_map, sf::RenderWindow &Window) {
+
+
+void Game::Draw(const std::vector<std::shared_ptr<Piece>>& piece_map, sf::RenderWindow &Window) {
+    auto[window_width,window_height] =  Window.getSize();
+
+
     ColorPalette colors(sf::Color(102, 204, 102),
                         sf::Color(255, 243, 230),
                         sf::Color(255, 43, 103),
@@ -34,19 +39,41 @@ void Game::Draw(std::vector<std::shared_ptr<Piece>> piece_map, sf::RenderWindow 
 
     }
 
+
+    sf::Texture texture;
+
+
+    if(!texture.loadFromFile("texture.png")){
+        std::cout<<'huj';
+        exit(2);
+    }
+    auto[texture_width, texture_height] = texture.getSize();
+
+
     for (auto &it: piece_map) {
         if (it != nullptr) {
-            sf::RectangleShape piece_sprite(sf::Vector2f(PIECE_WIDTH, PIECE_HEIGHT));
+            //sf::RectangleShape piece_sprite(sf::Vector2f(PIECE_WIDTH, PIECE_HEIGHT));
+            sf::Sprite piece_sprite;
+            piece_sprite.setTexture(texture);
+
+            float width_scale = (float) ((float) window_width/8)/(float) texture_width;
+            float height_scale = (float) ((float) window_height/8)/(float) texture_height;
+
+            piece_sprite.setScale(width_scale,height_scale);
+
             int y = it->pos_y;
             int x = it->pos_x;
             piece_sprite.setPosition(x * PIECE_WIDTH, y * PIECE_WIDTH);
-            if (it->GetColor()) {
-                piece_sprite.setFillColor(colors.white_piece);
-            } else piece_sprite.setFillColor(colors.black_piece);
+
+//            if (it->GetColor()) {
+//                piece_sprite.setFillColor(colors.white_piece);
+//            } else piece_sprite.setFillColor(colors.black_piece);
             Window.draw(piece_sprite);
 
         }
     }
+
+
 
 
 }
