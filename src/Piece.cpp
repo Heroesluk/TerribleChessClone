@@ -5,7 +5,7 @@
 #include "Piece.h"
 #include "algorithm"
 
-Piece::Piece(uInt pos_x, uInt pos_y, bool color, std::string piece_name) : pos_x{pos_x}, pos_y{pos_y}, color{color} {}
+Piece::Piece(uInt pos_x, uInt pos_y, bool color, std::string piece_name) : pos_x{pos_x}, pos_y{pos_y}, color{color}, piece_name{piece_name} {}
 
 //std::vector<uInt> Piece::LegalMoves() {};
 

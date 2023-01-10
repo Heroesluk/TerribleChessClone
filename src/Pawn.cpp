@@ -16,6 +16,7 @@ Pawn::Pawn(uInt posx, uInt posy, bool color, std::string piece_name) : Piece(pos
                                       -1, -1, -1, -1, -1, -1, -1, -1,
                                       0, 0, 0, 0, 0, 0, 0, 0};
 
+
 }
 
 

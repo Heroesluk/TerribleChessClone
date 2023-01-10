@@ -12,6 +12,7 @@ void Game::ClickToBoardCoords(uInt mouse_x, uInt mouse_y) {
 Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "My window") {
 
     board.SetupBoardPieces();
+    textures = LoadTextures();
 
 }
 
@@ -41,22 +42,29 @@ void Game::Draw(const std::vector<std::shared_ptr<Piece>>& piece_map, sf::Render
     }
 
 
-    sf::Texture texture;
-
-    std::string piece_name = "Pawn";
     std::string file_type = ".png";
-    if(!texture.loadFromFile(piece_name+file_type)){
-        std::cout<<'huj';
-        exit(2);
-    }
-    auto[texture_width, texture_height] = texture.getSize();
+    auto knight = textures["KnightW"];
+
+    auto[texture_width, texture_height] = knight.getSize();
 
 
     for (auto &it: piece_map) {
         if (it != nullptr) {
             //sf::RectangleShape piece_sprite(sf::Vector2f(PIECE_WIDTH, PIECE_HEIGHT));
             sf::Sprite piece_sprite;
-            piece_sprite.setTexture(texture);
+            auto pc = it->GetPieceName()+ "W";
+
+
+            if(it->GetColor()){
+                piece_sprite.setTexture(textures[it->GetPieceName() + "B"]);
+
+
+            }
+            else{
+                piece_sprite.setTexture(textures[it->GetPieceName() + "W"]);
+
+
+            }
 
             float width_scale = (float) ((float) window_width/8)/(float) texture_width;
             float height_scale = (float) ((float) window_height/8)/(float) texture_height;
@@ -105,6 +113,94 @@ void Game::GameLoop() {
 
         window.display();
     }
+
+
+}
+
+std::unordered_map<std::string, sf::Texture> Game::LoadTextures() {
+
+    std::unordered_map<std::string,sf::Texture> textures;
+
+    sf::Texture knight;
+    if (!knight.loadFromFile("Knight.png")) {
+        exit(2);
+    }
+    sf::Texture king;
+    if (!king.loadFromFile("King.png")) {
+        std::cout << 'huj';
+        exit(2);
+    }
+
+    sf::Texture rook;
+    if (!rook.loadFromFile("Rook.png")) {
+        exit(2);
+    }
+
+    sf::Texture queen;
+    if (!queen.loadFromFile("Queen.png")) {
+        exit(2);
+    }
+
+    sf::Texture pawn;
+    if (!pawn.loadFromFile("Pawn.png")) {
+        exit(2);
+    }
+    sf::Texture bishop;
+    if (!bishop.loadFromFile("Bishop.png")) {
+        exit(2);
+    }
+
+
+
+
+    sf::Texture knightB;
+    if (!knightB.loadFromFile("KnightB.png")) {
+        exit(2);
+    }
+    sf::Texture kingB;
+    if (!kingB.loadFromFile("KingB.png")) {
+        exit(2);
+    }
+
+    sf::Texture rookB;
+    if (!rookB.loadFromFile("RookB.png")) {
+        exit(2);
+    }
+
+    sf::Texture queenB;
+    if (!queenB.loadFromFile("QueenB.png")) {
+        exit(2);
+    }
+
+    sf::Texture pawnB;
+    if (!pawnB.loadFromFile("PawnB.png")) {
+        exit(2);
+    }
+    sf::Texture bishopB;
+    if (!bishopB.loadFromFile("BishopB.png")) {
+        exit(2);
+    }
+
+
+
+
+
+    textures["KnightW"] = knight;
+    textures["KingW"] = king;
+    textures["RookW"] = rook;
+    textures["BishopW"] = bishop;
+    textures["QueenW"] = queen;
+    textures["PawnW"] = pawn;
+
+    textures["KnightB"] = knightB;
+    textures["KingB"] = kingB;
+    textures["RookB"] = rookB;
+    textures["BishopB"] = bishopB;
+    textures["QueenB"] = queenB;
+    textures["PawnB"] = pawnB;
+
+    return textures;
+
 
 
 }

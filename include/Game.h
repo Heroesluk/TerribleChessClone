@@ -26,6 +26,8 @@ private:
     Board board;
 
     sf::RenderWindow window;
+    std::unordered_map<std::string,sf::Texture> textures;
+
     int turn{0};
 
 
@@ -33,6 +35,8 @@ public:
     Game();
 
     void GameLoop();
+
+    std::unordered_map<std::string,sf::Texture> LoadTextures();
 
     void ClickToBoardCoords(uInt mouse_x, uInt mouse_y);
 

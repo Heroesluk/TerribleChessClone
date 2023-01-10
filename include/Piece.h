@@ -12,9 +12,9 @@ using uInt = unsigned int;
 
 
 class Piece {
-private:
-    std::string piece_name;
 protected:
+    std::string piece_name;
+
     bool color;
 
 public:
