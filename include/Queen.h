@@ -8,7 +8,7 @@
 
 class Queen: public Piece{
 public:
-    Queen(uInt posx, uInt posy, bool color);
+    Queen(uInt posx, uInt posy, bool color, std::string piece_name);
 
     std::vector<uInt> LegalMoves(std::vector<int> pieces_positions) override;
     std::vector<uInt> LegalTakes(std::vector<int> pieces_positions) override;

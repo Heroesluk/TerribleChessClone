@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "cmath"
 #include "iostream"
+#include <typeinfo>
 
 void Game::ClickToBoardCoords(uInt mouse_x, uInt mouse_y) {
     boardX = floor(mouse_x / PIECE_WIDTH);
@@ -42,8 +43,9 @@ void Game::Draw(const std::vector<std::shared_ptr<Piece>>& piece_map, sf::Render
 
     sf::Texture texture;
 
-
-    if(!texture.loadFromFile("texture.png")){
+    std::string piece_name = "Pawn";
+    std::string file_type = ".png";
+    if(!texture.loadFromFile(piece_name+file_type)){
         std::cout<<'huj';
         exit(2);
     }
@@ -72,8 +74,6 @@ void Game::Draw(const std::vector<std::shared_ptr<Piece>>& piece_map, sf::Render
 
         }
     }
-
-
 
 
 }

@@ -3,7 +3,7 @@
 //
 #include "Rook.h"
 
-Rook::Rook(uInt posx, uInt posy, bool color) : Piece(posx, posy, color) {
+Rook::Rook(uInt posx, uInt posy, bool color, std::string piece_name) : Piece(posx, posy, color, piece_name) {
     std::vector<int> default_moves = {1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1,
                                       -1, -1, -1, -1, -1, -1, -1, -1,
                                       -1, -1, -1, -1, -1, -1, -1, -1,

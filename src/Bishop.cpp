@@ -3,8 +3,7 @@
 //
 #include "Bishop.h"
 
-Bishop::Bishop(uInt posx, uInt posy, bool color) : Piece(posx, posy, color) {
-
+Bishop::Bishop(uInt posx, uInt posy, bool color, std::string piece_name) : Piece(posx, posy, color, piece_name) {
 }
 
 std::vector<uInt> Bishop::LegalMoves(std::vector<int> pieces_positions) {

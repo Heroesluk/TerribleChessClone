@@ -12,45 +12,45 @@ void Board::SetupBoardPieces() {
 
 
 
-    piece_table2[0] = std::make_shared<Rook>(0, 0, true);
-    piece_table2[1] = std::make_shared<Knight>(1, 0, true);
-    piece_table2[2] = std::make_shared<Bishop>(2, 0, true);
-    piece_table2[3] = std::make_shared<King>(3, 0, true);
-    piece_table2[4] = std::make_shared<Queen>(4, 0, true);
-    piece_table2[5] = std::make_shared<Bishop>(5, 0, true);
-    piece_table2[6] = std::make_shared<Knight>(6, 0, true);
-    piece_table2[7] = std::make_shared<Rook>(7, 0, true);
+    piece_table2[0] = std::make_shared<Rook>(0, 0, true,   "Rook");
+    piece_table2[1] = std::make_shared<Knight>(1, 0, true, "Knight");
+    piece_table2[2] = std::make_shared<Bishop>(2, 0, true, "Bishop");
+    piece_table2[3] = std::make_shared<King>(3, 0, true,   "King");
+    piece_table2[4] = std::make_shared<Queen>(4, 0, true,  "Queen");
+    piece_table2[5] = std::make_shared<Bishop>(5, 0, true, "Bishop");
+    piece_table2[6] = std::make_shared<Knight>(6, 0, true, "Knight");
+    piece_table2[7] = std::make_shared<Rook>(7, 0, true,   "Rook");
 
-    piece_table2[8] = std::make_shared<Pawn>(0,  1, true);
-    piece_table2[9] = std::make_shared<Pawn>(1,  1, true);
-    piece_table2[10] = std::make_shared<Pawn>(2, 1, true);
-    piece_table2[11] = std::make_shared<Pawn>(3, 1, true);
-    piece_table2[12] = std::make_shared<Pawn>(4, 1, true);
-    piece_table2[13] = std::make_shared<Pawn>(5, 1, true);
-    piece_table2[14] = std::make_shared<Pawn>(6, 1, true);
-    piece_table2[15] = std::make_shared<Pawn>(7, 1, true);
-
-
+    piece_table2[8] = std::make_shared<Pawn>(0,  1, true, "Pawn");
+    piece_table2[9] = std::make_shared<Pawn>(1,  1, true, "Pawn");
+    piece_table2[10] = std::make_shared<Pawn>(2, 1, true, "Pawn");
+    piece_table2[11] = std::make_shared<Pawn>(3, 1, true, "Pawn");
+    piece_table2[12] = std::make_shared<Pawn>(4, 1, true, "Pawn");
+    piece_table2[13] = std::make_shared<Pawn>(5, 1, true, "Pawn");
+    piece_table2[14] = std::make_shared<Pawn>(6, 1, true, "Pawn");
+    piece_table2[15] = std::make_shared<Pawn>(7, 1, true, "Pawn");
 
 
 
-    piece_table2[56] = std::make_shared<Rook>(0, 7, false);
-    piece_table2[57] = std::make_shared<Knight>(1, 7, false);
-    piece_table2[58] = std::make_shared<Bishop>(2, 7, false);
-    piece_table2[59] = std::make_shared<King>(3, 7, false);
-    piece_table2[60] = std::make_shared<Queen>(4, 7, false);
-    piece_table2[61] = std::make_shared<Bishop>(5, 7, false);
-    piece_table2[62] = std::make_shared<Knight>(6, 7, false);
-    piece_table2[63] = std::make_shared<Rook>(7, 7, false);
 
-    piece_table2[48] = std::make_shared<Pawn>(0,  6, false);
-    piece_table2[49] = std::make_shared<Pawn>(1,  6, false);
-    piece_table2[50] = std::make_shared<Pawn>(2, 6, false);
-    piece_table2[51] = std::make_shared<Pawn>(3, 6, false);
-    piece_table2[52] = std::make_shared<Pawn>(4, 6, false);
-    piece_table2[53] = std::make_shared<Pawn>(5, 6, false);
-    piece_table2[54] = std::make_shared<Pawn>(6, 6, false);
-    piece_table2[55] = std::make_shared<Pawn>(7, 6, false);
+
+    piece_table2[56] = std::make_shared<Rook>(0, 7,   false, "Rook");
+    piece_table2[57] = std::make_shared<Knight>(1, 7, false, "Knight");
+    piece_table2[58] = std::make_shared<Bishop>(2, 7, false, "Bishop");
+    piece_table2[59] = std::make_shared<King>(3, 7,   false, "King");
+    piece_table2[60] = std::make_shared<Queen>(4, 7,  false, "Queen");
+    piece_table2[61] = std::make_shared<Bishop>(5, 7, false, "Bishop");
+    piece_table2[62] = std::make_shared<Knight>(6, 7, false, "Knight");
+    piece_table2[63] = std::make_shared<Rook>(7, 7,   false, "Rook");
+
+    piece_table2[48] = std::make_shared<Pawn>(0, 6, false, "Pawn");
+    piece_table2[49] = std::make_shared<Pawn>(1, 6, false, "Pawn");
+    piece_table2[50] = std::make_shared<Pawn>(2, 6, false, "Pawn");
+    piece_table2[51] = std::make_shared<Pawn>(3, 6, false, "Pawn");
+    piece_table2[52] = std::make_shared<Pawn>(4, 6, false, "Pawn");
+    piece_table2[53] = std::make_shared<Pawn>(5, 6, false, "Pawn");
+    piece_table2[54] = std::make_shared<Pawn>(6, 6, false, "Pawn");
+    piece_table2[55] = std::make_shared<Pawn>(7, 6, false, "Pawn");
 
 
     for (int i = 0; i < 64; i++) {

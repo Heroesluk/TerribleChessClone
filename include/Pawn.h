@@ -16,7 +16,7 @@ private:
 
 public:
 
-    Pawn(uInt posx, uInt posy, bool color);
+    Pawn(uInt posx, uInt posy, bool color, std::string piece_name);
 
 
     std::vector<uInt> LegalMoves(std::vector<int> pieces_positions) override;

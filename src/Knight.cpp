@@ -3,7 +3,7 @@
 //
 #include "Knight.h"
 
-Knight::Knight(uInt posx, uInt posy, bool color) : Piece(posx, posy, color) {
+Knight::Knight(uInt posx, uInt posy, bool color, std::string piece_name) :  Piece(posx, posy, color, piece_name) {
 
 }
 

@@ -1,6 +1,6 @@
 #include "King.h"
 
-King::King(uInt posx, uInt posy, bool color) : Piece(posx, posy, color) {
+King::King(uInt posx, uInt posy, bool color, std::string piece_name) : Piece(posx, posy, color, piece_name) {
 
 }
 

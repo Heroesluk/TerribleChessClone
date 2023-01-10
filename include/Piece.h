@@ -12,6 +12,8 @@ using uInt = unsigned int;
 
 
 class Piece {
+private:
+    std::string piece_name;
 protected:
     bool color;
 
@@ -19,7 +21,10 @@ public:
     uInt pos_x;
     uInt pos_y;
 
-    Piece(uInt pos_x, uInt pos_y, bool color);
+
+
+
+    Piece(uInt pos_x, uInt pos_y, bool color, std::string piece_name);
 
     virtual std::vector<uInt> LegalMoves(std::vector<int> pieces_positions) =0;
 
@@ -30,6 +35,8 @@ public:
     bool GetColor();
 
     uInt GetPosIndex();
+
+    std::string GetPieceName();
 
 };
 
