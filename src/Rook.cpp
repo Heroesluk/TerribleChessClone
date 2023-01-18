@@ -52,38 +52,50 @@ std::vector<uInt> Rook::LegalTakes(std::vector<int> pieces_positions) {
 
 
     for (int y = (int) pos_y; y < 8; y++) {
-        if(pieces_positions[pos_x + (8*y)]!=-1){
-            if(pieces_positions[pos_x+(8*y)]!=color){
-                moves.emplace_back(pos_x + (8 * (y)));
-                break;
-            }
+        if (pieces_positions[pos_x + (y * 8)] == color) {
+            break;
+        } else if (pieces_positions[pos_x + (y * 8)] == -1) {
+            moves.emplace_back(pos_x + (y * 8));
+
+        } else {
+            moves.emplace_back(pos_x + (y * 8));
+            break;
         }
     }
 
     for (int y = (int) pos_y; y >= 0; y--) {
-        if(pieces_positions[pos_x + (8*y)]!=-1){
-            if(pieces_positions[pos_x+(8*y)]!=color){
-                moves.emplace_back(pos_x + (8 * (y)));
-                break;
-            }
+        if (pieces_positions[pos_x + (y * 8)] == color) {
+            break;
+        } else if (pieces_positions[pos_x + (y * 8)] == -1) {
+            moves.emplace_back(pos_x + (y * 8));
+
+        } else {
+            moves.emplace_back(pos_x + (y * 8));
+            break;
         }
     }
 
     for (int x = (int) pos_x; x < 8; x++) {
-        if(pieces_positions[x + (8*pos_y)]!=-1){
-            if(pieces_positions[x+(8*pos_y)]!=color){
-                moves.emplace_back(x + (8 * (pos_y)));
-                break;
-            }
+        if (pieces_positions[x + (pos_y * 8)] == color) {
+            break;
+        } else if (pieces_positions[x + (pos_y * 8)] == -1) {
+            moves.emplace_back(x + (pos_y * 8));
+
+        } else {
+            moves.emplace_back(x + (pos_y * 8));
+            break;
         }
     }
 
     for (int x = (int) pos_x; x>=0; x--) {
-        if(pieces_positions[x + (8*pos_y)]!=-1){
-            if(pieces_positions[x+(8*pos_y)]!=color){
-                moves.emplace_back(x + (8 * (pos_y)));
-                break;
-            }
+        if (pieces_positions[x + (pos_y * 8)] == color) {
+            break;
+        } else if (pieces_positions[x + (pos_y * 8)] == -1) {
+            moves.emplace_back(x + (pos_y * 8));
+
+        } else {
+            moves.emplace_back(x + (pos_y * 8));
+            break;
         }
     }
 

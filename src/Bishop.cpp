@@ -17,7 +17,7 @@ std::vector<uInt> Bishop::LegalMoves(std::vector<int> pieces_positions) {
     while (x < 7 && y < 7) {
         x++;
         y++;
-        if (pieces_positions[x + (y * 8)]!=-1){
+        if (pieces_positions[x + (y * 8)] != -1) {
             break;
         }
         moves.emplace_back(x + (y * 8));
@@ -29,7 +29,7 @@ std::vector<uInt> Bishop::LegalMoves(std::vector<int> pieces_positions) {
     while (x > 0 && y > 0) {
         x--;
         y--;
-        if (pieces_positions[x + (y * 8)]!=-1){
+        if (pieces_positions[x + (y * 8)] != -1) {
             break;
         }
 
@@ -42,7 +42,7 @@ std::vector<uInt> Bishop::LegalMoves(std::vector<int> pieces_positions) {
     while (x > 0 && y < 7) {
         x--;
         y++;
-        if (pieces_positions[x + (y * 8)]!=-1){
+        if (pieces_positions[x + (y * 8)] != -1) {
             break;
         }
 
@@ -54,7 +54,7 @@ std::vector<uInt> Bishop::LegalMoves(std::vector<int> pieces_positions) {
     while (x < 7 && y > 0) {
         x++;
         y--;
-        if (pieces_positions[x + (y * 8)]!=-1){
+        if (pieces_positions[x + (y * 8)] != -1) {
             break;
         }
 
@@ -83,14 +83,12 @@ std::vector<uInt> Bishop::LegalTakes(std::vector<int> pieces_positions) {
         x++;
         y++;
 
-        if (pieces_positions[x + (y * 8)]==color){
+        if (pieces_positions[x + (y * 8)] == color) {
             break;
-        }
-        else if(pieces_positions[x + (y * 8)]==-1){
+        } else if (pieces_positions[x + (y * 8)] == -1) {
             moves.emplace_back(x + (y * 8));
 
-        }
-        else{
+        } else {
             moves.emplace_back(x + (y * 8));
             break;
 
@@ -104,17 +102,13 @@ std::vector<uInt> Bishop::LegalTakes(std::vector<int> pieces_positions) {
     while (x > 0 && y > 0) {
         x--;
         y--;
-        if (pieces_positions[x + (y * 8)]==color){
+        if (pieces_positions[x + (y * 8)] == color) {
             break;
-        }
-        else if(pieces_positions[x + (y * 8)]==-1){
+        } else if (pieces_positions[x + (y * 8)] == -1) {
             moves.emplace_back(x + (y * 8));
-
-        }
-        else{
+        } else {
             moves.emplace_back(x + (y * 8));
             break;
-
         }
     }
 
@@ -124,14 +118,12 @@ std::vector<uInt> Bishop::LegalTakes(std::vector<int> pieces_positions) {
     while (x > 0 && y < 7) {
         x--;
         y++;
-        if (pieces_positions[x + (y * 8)]==color){
+        if (pieces_positions[x + (y * 8)] == color) {
             break;
-        }
-        else if(pieces_positions[x + (y * 8)]==-1){
+        } else if (pieces_positions[x + (y * 8)] == -1) {
             moves.emplace_back(x + (y * 8));
 
-        }
-        else{
+        } else {
             moves.emplace_back(x + (y * 8));
             break;
 
@@ -144,14 +136,12 @@ std::vector<uInt> Bishop::LegalTakes(std::vector<int> pieces_positions) {
     while (x < 7 && y > 0) {
         x++;
         y--;
-        if (pieces_positions[x + (y * 8)]==color){
+        if (pieces_positions[x + (y * 8)] == color) {
             break;
-        }
-        else if(pieces_positions[x + (y * 8)]==-1){
+        } else if (pieces_positions[x + (y * 8)] == -1) {
             moves.emplace_back(x + (y * 8));
 
-        }
-        else{
+        } else {
             moves.emplace_back(x + (y * 8));
             break;
 
