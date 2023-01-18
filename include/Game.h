@@ -40,7 +40,6 @@ public:
 
     void ClickToBoardCoords(uInt mouse_x, uInt mouse_y);
 
-    void ChangeTurn();
 
     void Draw(const std::vector<std::shared_ptr<Piece>>& piece_map, sf::RenderWindow &Window);
 
