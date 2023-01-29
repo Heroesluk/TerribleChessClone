@@ -10,8 +10,6 @@
 #include "King.h"
 void Board::SetupBoardPieces() {
 
-
-
     piece_table2[0] = std::make_shared<Rook>(0, 0, true,   "Rook");
     piece_table2[1] = std::make_shared<Knight>(1, 0, true, "Knight");
     piece_table2[2] = std::make_shared<Bishop>(2, 0, true, "Bishop");
@@ -29,9 +27,6 @@ void Board::SetupBoardPieces() {
     piece_table2[13] = std::make_shared<Pawn>(5, 1, true, "Pawn");
     piece_table2[14] = std::make_shared<Pawn>(6, 1, true, "Pawn");
     piece_table2[15] = std::make_shared<Pawn>(7, 1, true, "Pawn");
-
-
-
 
 
     piece_table2[56] = std::make_shared<Rook>(0, 7,   false, "Rook");
@@ -53,16 +48,16 @@ void Board::SetupBoardPieces() {
     piece_table2[55] = std::make_shared<Pawn>(7, 6, false, "Pawn");
 
 
-    for (int i = 0; i < 64; i++) {
-        piece_table2.emplace(i, nullptr);
-    }
+//    for (int i = 0; i < 64; i++) {
+//        piece_table2.emplace(i, nullptr);
+//    }
 
 
     currently_held_piece = nullptr;
 }
 
 bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_move) {
-    //function returns true if it makes any real movement on the board
+    //function returns true if player makes any real movement on the board
     //swapping held piece does not count
     bool made_move = false;
 
@@ -72,11 +67,23 @@ bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_mov
     if (pc_at_click != nullptr) {
         if (currently_held_piece == nullptr && pc_at_click->GetColor() == color_to_move) { //set a held piece if not holding anything
             SetCurrentPiece(pc_at_click);
-        } else if (currently_held_piece != nullptr) {
-            if (pc_at_click->GetColor() ==
-                currently_held_piece->GetColor()) { //swap currently held piece if matches held piece
-                SetCurrentPiece(pc_at_click);
-            } else if (currently_held_piece->GetColor() == color_to_move) { //take an enemy piece, replace with own
+        }
+
+        //swap piece or castle
+        else if (currently_held_piece != nullptr) {
+
+            if (pc_at_click->GetColor() == currently_held_piece->GetColor())
+            {
+                if(currently_held_piece->GetPieceName()=="King"&&pc_at_click->GetPieceName()=="Rook"){
+                    if(CheckIfLegalMove(board_cursorX,board_cursorY)){
+                        exit(1);
+                    }
+                }
+                else{
+                    SetCurrentPiece(pc_at_click);
+                }
+            }
+            else if (currently_held_piece->GetColor() == color_to_move) { //take an enemy piece, replace with own
                 if (CheckIfLegalTake(board_cursorX, board_cursorY)) {
                     currently_held_piece->Move(board_cursorX, board_cursorY);
                     SetCurrentPiece(nullptr);
@@ -89,7 +96,9 @@ bool Board::MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_mov
             }
         }
 
-    } else if (currently_held_piece != nullptr) {
+    }
+
+    else if (currently_held_piece != nullptr) {
         if (currently_held_piece->GetColor() == color_to_move) { //move piece to empty square
             if (CheckIfLegalMove(board_cursorX, board_cursorY)) {
                 currently_held_piece->Move(board_cursorX, board_cursorY);
@@ -190,11 +199,19 @@ uInt Board::GetPieceIndex(uInt posx, uInt posy) {
 bool Board::CheckIfLegalMove(uInt moveX, uInt moveY){
     auto moves = currently_held_piece->LegalMoves(ReturnPiecesPositions());
 
+//    auto position = moveX + (moveY+8);
+//    bool a = std::any_of(moves.begin(),moves.end(),[position](uInt move){return position == move;});
+//
+//    return a;
+
     for (auto move_index: moves) {
         if (move_index == moveX + (moveY * 8)) {
             return true;
         }
     }
+
+
+
 
 
     return false;
@@ -207,15 +224,14 @@ bool Board::CheckIfLegalTake(uInt takeX, uInt takeY) {
 
     auto takes = currently_held_piece->LegalTakes(ReturnPiecesPositions());
 
+
     for (auto take_index: takes) {
         if (take_index == takeX + (takeY * 8)) {
-
             return true;
         }
     }
 
     return false;
-
 }
 
 std::shared_ptr<Piece> Board::GetCurrentlyHeld() {

@@ -163,8 +163,6 @@ std::unordered_map<std::string, sf::Texture> Game::LoadTextures() {
     }
 
 
-
-
     sf::Texture knightB;
     if (!knightB.loadFromFile("KnightB.png")) {
         exit(2);
