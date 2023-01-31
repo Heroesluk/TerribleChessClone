@@ -21,10 +21,9 @@ Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "My window") {
 void Game::Draw(const std::vector<std::shared_ptr<Piece>>& piece_map, sf::RenderWindow &Window) {
     auto[window_width,window_height] =  Window.getSize();
 
-
     ColorPalette colors(sf::Color(102, 204, 102),
                         sf::Color(255, 243, 230),
-                        sf::Color(255, 43, 103),
+                        sf::Color(255, 0, 103),
                         sf::Color(38, 38, 38));
 
     sf::RectangleShape tile(sf::Vector2f(PIECE_WIDTH, PIECE_HEIGHT));
@@ -46,51 +45,45 @@ void Game::Draw(const std::vector<std::shared_ptr<Piece>>& piece_map, sf::Render
     auto knight = textures["KnightW"];
 
     auto[texture_width, texture_height] = knight.getSize();
-
+    float width_scale = (float) ((float) window_width/8)/(float) texture_width;
+    float height_scale = (float) ((float) window_height/8)/(float) texture_height;
 
     for (auto &it: piece_map) {
         if (it != nullptr) {
             //sf::RectangleShape piece_sprite(sf::Vector2f(PIECE_WIDTH, PIECE_HEIGHT));
             sf::Sprite piece_sprite;
             auto pc = it->GetPieceName()+ "W";
-
-
             if(it->GetColor()){
                 piece_sprite.setTexture(textures[it->GetPieceName() + "B"]);
-
-
             }
             else{
                 piece_sprite.setTexture(textures[it->GetPieceName() + "W"]);
-
-
             }
-
-            float width_scale = (float) ((float) window_width/8)/(float) texture_width;
-            float height_scale = (float) ((float) window_height/8)/(float) texture_height;
-
             piece_sprite.setScale(width_scale,height_scale);
 
-            int y = it->pos_y;
-            int x = it->pos_x;
+            auto y = (float) it->pos_y;
+            auto x = (float) it->pos_x;
             piece_sprite.setPosition(x * PIECE_WIDTH, y * PIECE_WIDTH);
-
-//            if (it->GetColor()) {
-//                piece_sprite.setFillColor(colors.white_piece);
-//            } else piece_sprite.setFillColor(colors.black_piece);
             Window.draw(piece_sprite);
 
         }
     }
+    //if holding a piece, highlight all possible moves
+    sf::RectangleShape pos_move(sf::Vector2f(30, 30));
+    pos_move.setFillColor(colors.white_piece);
+
 
     if(board.GetCurrentlyHeld()!= nullptr){
-        for(auto mv: board.GetCurrentlyHeld()->LegalTakes(board.ReturnPiecesPositions())){
-            sf::RectangleShape tile(sf::Vector2f(mv, mv));
+        auto takes = board.GetCurrentlyHeld()->LegalTakes(board.ReturnPiecesPositions());
+        auto moves = board.GetCurrentlyHeld()->LegalMoves(board.ReturnPiecesPositions());
+        takes.insert(takes.end(),moves.begin(),moves.end());
+
+        for(auto mv: takes){
             int y = mv/8;
             int x = mv%8;
 
-            tile.setPosition((x*PIECE_WIDTH)+PIECE_WIDTH/3, (y*PIECE_HEIGHT)+PIECE_HEIGHT/3);
-            Window.draw(tile);
+            pos_move.setPosition((x*PIECE_WIDTH)+PIECE_WIDTH/3, (y*PIECE_HEIGHT)+PIECE_HEIGHT/3);
+            Window.draw(pos_move);
 
 
         }

@@ -10,7 +10,6 @@ Knight::Knight(uInt posx, uInt posy, bool color, std::string piece_name) : Piece
 std::vector<uInt> Knight::LegalMoves(std::vector<int> pieces_positions) {
     std::vector<uInt> moves;
 
-
     return LegalTakes(pieces_positions);
 
 }
@@ -26,15 +25,6 @@ std::vector<uInt> Knight::LegalTakes(std::vector<int> pieces_positions) {
             moves.emplace_back(pos_x+deltax[i] + (8*(pos_y+deltay[i])));
     }
 
-//    moves.emplace_back(pos_x + 1 + (8 * (pos_y + 2)));
-//    moves.emplace_back(pos_x - 1 + (8 * (pos_y + 2)));
-//    moves.emplace_back(pos_x + 1 + (8 * (pos_y - 2)));
-//    moves.emplace_back(pos_x - 1 + (8 * (pos_y - 2)));
-//
-//    moves.emplace_back(pos_x + 2 + (8 * (pos_y - 1)));
-//    moves.emplace_back(pos_x - 2 + (8 * (pos_y - 1)));
-//    moves.emplace_back(pos_x + 2 + (8 * (pos_y + 1)));
-//    moves.emplace_back(pos_x - 2 + (8 * (pos_y + 1)));
 
     return moves;
 }

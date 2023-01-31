@@ -7,8 +7,6 @@ Rook::Rook(uInt posx, uInt posy, bool color, std::string piece_name) : Piece(pos
     }
 
 std::vector<uInt> Rook::LegalMoves(std::vector<int> pieces_positions) {
-
-
     std::vector<uInt> moves;
 
     for (int y = (int) pos_y; y < 8; y++) {
@@ -44,10 +42,6 @@ std::vector<uInt> Rook::LegalMoves(std::vector<int> pieces_positions) {
 }
 
 std::vector<uInt> Rook::LegalTakes(std::vector<int> pieces_positions) {
-
-
-    //color = pieces_positions[pos_x+(8*pos_y)];
-
     std::vector<uInt> moves;
 
 
@@ -98,7 +92,6 @@ std::vector<uInt> Rook::LegalTakes(std::vector<int> pieces_positions) {
             break;
         }
     }
-
 
     return moves;
 }
