@@ -12,6 +12,8 @@
 #include "Board.h"
 #include "SFML/Graphics.hpp"
 #include "ColorPalette.h"
+#include "UI_Button.h"
+
 
 using uInt = unsigned int;
 
@@ -27,6 +29,7 @@ private:
 
     sf::RenderWindow window;
     std::unordered_map<std::string,sf::Texture> textures;
+    uInt board_render_width, board_render_height;
 
     int turn{0};
 
@@ -42,6 +45,8 @@ public:
 
 
     void Draw(const std::vector<std::shared_ptr<Piece>>& piece_map, sf::RenderWindow &Window);
+    void DrawUI(sf::RenderWindow &Window);
+
 
 
 };

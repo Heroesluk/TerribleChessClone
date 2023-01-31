@@ -9,10 +9,12 @@ void Game::ClickToBoardCoords(uInt mouse_x, uInt mouse_y) {
 
 }
 
-Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "My window") {
+Game::Game() : window(sf::VideoMode(1500, HEIGHT), "My window") {
 
     board.SetupBoardPieces();
     textures = LoadTextures();
+    board_render_width = 800;
+    board_render_width = 800;
 
 }
 
@@ -45,8 +47,8 @@ void Game::Draw(const std::vector<std::shared_ptr<Piece>>& piece_map, sf::Render
     auto knight = textures["KnightW"];
 
     auto[texture_width, texture_height] = knight.getSize();
-    float width_scale = (float) ((float) window_width/8)/(float) texture_width;
-    float height_scale = (float) ((float) window_height/8)/(float) texture_height;
+    float width_scale = (float)100 /(float) texture_width;
+    float height_scale = (float)100/ (float)texture_height;
 
     for (auto &it: piece_map) {
         if (it != nullptr) {
@@ -115,6 +117,7 @@ void Game::GameLoop() {
         window.clear();
         
         Draw(board.ReturnAllPieces(), window);
+        DrawUI(window);
 
         window.display();
     }
@@ -203,6 +206,37 @@ std::unordered_map<std::string, sf::Texture> Game::LoadTextures() {
     textures["PawnB"] = pawnB;
 
     return textures;
+
+
+
+}
+
+void Game::DrawUI(sf::RenderWindow &Window) {
+    uInt offset = 800;
+
+    sf::RectangleShape menu_back;
+    menu_back.setSize(sf::Vector2f(800,800));
+    menu_back.setFillColor(sf::Color(255,0,0));
+    menu_back.setPosition(offset,0);
+    Window.draw(menu_back);
+//
+    Button b1(offset, 300, 100,50);
+    sf::Text text = b1.ReturnText();
+
+    sf::Font font;
+    if(!font.loadFromFile("arial.ttf")) {
+        exit(2);
+    }
+    text.setFont(font);
+
+
+    text.setStyle(sf::Text::Bold);
+
+    sf::RectangleShape btn1 = b1.ReturnButton();
+    Window.draw(btn1);
+    Window.draw(text);
+
+
 
 
 

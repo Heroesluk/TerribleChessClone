@@ -9,7 +9,7 @@ set(SOURCE_FILES
         include/Game.h
         include/Piece.h
         src/main.cpp
-        src/Piece.cpp include/Board.h src/Board.cpp src/Game.cpp include/ColorPalette.h src/ColorPalette.cpp include/Pawn.h src/Pawn.cpp include/Rook.h src/Rook.cpp include/Bishop.h src/Bishop.cpp include/Queen.h src/Queen.cpp include/Knight.h src/Knight.cpp include/King.h src/King.cpp)
+        src/Piece.cpp include/Board.h src/Board.cpp src/Game.cpp include/ColorPalette.h src/ColorPalette.cpp include/Pawn.h src/Pawn.cpp include/Rook.h src/Rook.cpp include/Bishop.h src/Bishop.cpp include/Queen.h src/Queen.cpp include/Knight.h src/Knight.cpp include/King.h src/King.cpp include/UI_Button.h src/UI_Button.cpp)
 
 
 
