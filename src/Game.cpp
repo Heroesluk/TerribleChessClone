@@ -13,6 +13,14 @@ Game::Game() : window(sf::VideoMode(1500, HEIGHT), "My window") {
 
     board.SetupBoardPieces();
     textures = LoadTextures();
+
+
+    if(!text_font.loadFromFile("arial.ttf")) {
+        exit(2);
+    }
+
+
+    SetupUI();
     board_render_width = 800;
     board_render_width = 800;
 
@@ -101,13 +109,21 @@ void Game::GameLoop() {
                 window.close();
 
             else if (event.type == sf::Event::MouseButtonPressed) {
+                auto x = event.mouseButton.x;
+                auto y = event.mouseButton.y;
+                if(x<800){
+                    ClickToBoardCoords(x,y);
+                    bool moved = board.MakeAction(boardX, boardY, turn % 2);
+                    if (moved) {
+                        turn += 1;
+                    }
+                }
+                else{
+                    for(auto btn: buttons){
+                        if(btn.CheckIfClicked(x,y)){
 
-                //
-                ClickToBoardCoords(event.mouseButton.x, event.mouseButton.y);
-
-                bool moved = board.MakeAction(boardX, boardY, turn % 2);
-                if (moved) {
-                    turn += 1;
+                        }
+                    }
                 }
 
 
@@ -212,30 +228,45 @@ std::unordered_map<std::string, sf::Texture> Game::LoadTextures() {
 }
 
 void Game::DrawUI(sf::RenderWindow &Window) {
-    uInt offset = 800;
 
+
+    uInt offset = 800;
     sf::RectangleShape menu_back;
     menu_back.setSize(sf::Vector2f(800,800));
     menu_back.setFillColor(sf::Color(255,0,0));
     menu_back.setPosition(offset,0);
     Window.draw(menu_back);
-//
-    Button b1(offset, 300, 100,50);
-    sf::Text text = b1.ReturnText();
 
-    sf::Font font;
-    if(!font.loadFromFile("arial.ttf")) {
-        exit(2);
+
+
+
+
+    for(auto button: buttons){
+        sf::Text text = button.ReturnText();
+        text.setFont(text_font);
+        sf::RectangleShape btn1 = button.ReturnButton();
+
+        Window.draw(btn1);
+        Window.draw(text);
+
     }
-    text.setFont(font);
 
 
-    text.setStyle(sf::Text::Bold);
 
-    sf::RectangleShape btn1 = b1.ReturnButton();
-    Window.draw(btn1);
-    Window.draw(text);
 
+
+
+
+}
+
+void Game::SetupUI() {
+    Button b1(800, 300, 100,50, "Dziala",1);
+    Button b2(800, 500, 100,50, "Drugi",2);
+    Button b3(800, 700, 100,50, "Trzeci",3);
+
+    buttons.push_back(b1);
+    buttons.push_back(b2);
+    buttons.push_back(b3);
 
 
 
