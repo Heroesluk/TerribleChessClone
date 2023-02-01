@@ -37,7 +37,7 @@ void Game::Draw(const std::vector<std::shared_ptr<Piece>>& piece_map, sf::Render
     ColorPalette colors(sf::Color(102, 204, 102),
                         sf::Color(255, 243, 230),
                         sf::Color(255, 0, 103),
-                        sf::Color(38, 38, 38));
+                        sf::Color(38, 38, 255));
 
     sf::RectangleShape tile(sf::Vector2f(PIECE_WIDTH, PIECE_HEIGHT));
     for (int i = 0; i < 8; i++) {
@@ -83,21 +83,30 @@ void Game::Draw(const std::vector<std::shared_ptr<Piece>>& piece_map, sf::Render
     }
     //if holding a piece, highlight all possible moves
     sf::RectangleShape pos_move(sf::Vector2f(30, 30));
+    sf::RectangleShape pos_take(sf::Vector2f(30, 30));
     pos_move.setFillColor(colors.white_piece);
+    pos_take.setFillColor(colors.black_piece);
 
 
     if(board.GetCurrentlyHeld()!= nullptr){
         auto takes = board.GetCurrentlyHeld()->LegalTakes(board.ReturnPiecesPositions());
         auto moves = board.GetCurrentlyHeld()->LegalMoves(board.ReturnPiecesPositions());
-        takes.insert(takes.end(),moves.begin(),moves.end());
 
-        for(auto mv: takes){
+        for(auto mv: moves){
             int y = mv/8;
             int x = mv%8;
 
             pos_move.setPosition((x*PIECE_WIDTH)+PIECE_WIDTH/3, (y*PIECE_HEIGHT)+PIECE_HEIGHT/3);
             Window.draw(pos_move);
 
+        }
+
+        for(auto mv: takes){
+            int y = mv/8;
+            int x = mv%8;
+
+            pos_take.setPosition((x*PIECE_WIDTH)+PIECE_WIDTH/3, (y*PIECE_HEIGHT)+PIECE_HEIGHT/3);
+            Window.draw(pos_take);
 
         }
     }
