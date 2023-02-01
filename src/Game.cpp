@@ -2,6 +2,7 @@
 #include "cmath"
 #include "iostream"
 #include <typeinfo>
+#include "fstream"
 
 void Game::ClickToBoardCoords(uInt mouse_x, uInt mouse_y) {
     boardX = floor(mouse_x / PIECE_WIDTH);
@@ -9,7 +10,7 @@ void Game::ClickToBoardCoords(uInt mouse_x, uInt mouse_y) {
 
 }
 
-Game::Game() : window(sf::VideoMode(1500, HEIGHT), "My window") {
+Game::Game() : window(sf::VideoMode(WIDTH+200, HEIGHT), "My window") {
 
     board.SetupBoardPieces();
     textures = LoadTextures();
@@ -121,6 +122,7 @@ void Game::GameLoop() {
                 else{
                     for(auto btn: buttons){
                         if(btn.CheckIfClicked(x,y)){
+                            LoadGameState();
 
                         }
                     }
@@ -260,14 +262,76 @@ void Game::DrawUI(sf::RenderWindow &Window) {
 }
 
 void Game::SetupUI() {
-    Button b1(800, 300, 100,50, "Dziala",1);
-    Button b2(800, 500, 100,50, "Drugi",2);
-    Button b3(800, 700, 100,50, "Trzeci",3);
+    Button b1(800, 300, 100,100, "Dziala",1);
+    Button b2(800, 500, 100,100, "Drugi",2);
+    Button b3(800, 700, 100,100, "Trzeci",3);
 
     buttons.push_back(b1);
     buttons.push_back(b2);
     buttons.push_back(b3);
 
+
+
+
+}
+
+void Game::SaveGameState() {
+    std::string temp;
+
+    for(auto pc: board.ReturnAllPieces()){
+        temp.append(pc->GetPieceName());
+        temp.append("-");
+        temp.append(std::to_string(pc->GetColor()));
+        temp.append("-");
+        temp.append(std::to_string(pc->GetPosIndex()));
+        temp.append(";");
+
+    }
+
+
+    std::ofstream  out("output.txt");
+    out<< temp;
+    out.close();
+
+    exit(5);
+
+
+
+}
+
+void Game::LoadGameState() {
+    std::ifstream f("output.txt");
+
+    int t = 0;
+
+
+    std::string content( (std::istreambuf_iterator<char>(f)), (std::istreambuf_iterator<char>()));
+
+
+    std::vector<std::string> v;
+
+    std::string number;
+
+    for(int i = 0; i < content.length(); ++i)
+    {
+
+        if(content[i] == ';')
+        {
+            if(number.size())
+            {
+                v.push_back(number);
+                number.clear();
+
+            }
+        }
+        else{
+            number+=std::string(1,content[i]);
+        }
+    }
+
+    int b = 0;
+
+    board.ResetBoard();
 
 
 

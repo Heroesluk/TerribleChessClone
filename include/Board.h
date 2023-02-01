@@ -55,6 +55,8 @@ public:
 
     std::shared_ptr<Piece> GetCurrentlyHeld();
 
+    void ResetBoard();
+
 
 };
 

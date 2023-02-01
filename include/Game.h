@@ -40,14 +40,17 @@ public:
 
     void GameLoop();
 
+
+
     std::unordered_map<std::string,sf::Texture> LoadTextures();
 
     void ClickToBoardCoords(uInt mouse_x, uInt mouse_y);
-
-
     void Draw(const std::vector<std::shared_ptr<Piece>>& piece_map, sf::RenderWindow &Window);
     void DrawUI(sf::RenderWindow &Window);
     void SetupUI();
+
+    void SaveGameState();
+    void LoadGameState();
 
 
 

@@ -10,6 +10,8 @@
 #include "King.h"
 void Board::SetupBoardPieces() {
 
+    piece_table2.clear();
+
     piece_table2[0] = std::make_shared<Rook>(0, 0, true,   "Rook");
     piece_table2[1] = std::make_shared<Knight>(1, 0, true, "Knight");
     piece_table2[2] = std::make_shared<Bishop>(2, 0, true, "Bishop");
@@ -48,9 +50,7 @@ void Board::SetupBoardPieces() {
     piece_table2[55] = std::make_shared<Pawn>(7, 6, false, "Pawn");
 
 
-//    for (int i = 0; i < 64; i++) {
-//        piece_table2.emplace(i, nullptr);
-//    }
+
 
 
     currently_held_piece = nullptr;
@@ -236,4 +236,10 @@ bool Board::CheckIfLegalTake(uInt takeX, uInt takeY) {
 
 std::shared_ptr<Piece> Board::GetCurrentlyHeld() {
     return currently_held_piece;
+}
+
+void Board::ResetBoard() {
+    SetupBoardPieces();
+
+
 }
