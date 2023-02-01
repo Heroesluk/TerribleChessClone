@@ -8,14 +8,6 @@
 
 
 Pawn::Pawn(uInt posx, uInt posy, bool color, std::string piece_name) : Piece(posx, posy, color, piece_name) {
-    std::vector<int> default_moves = {1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1,
-                                      -1, -1, -1, -1, -1, -1, -1, -1,
-                                      -1, -1, -1, -1, -1, -1, -1, -1,
-                                      -1, -1, -1, -1, -1, -1, -1, -1,
-                                      -1, -1, -1, -1, -1, -1, -1, -1,
-                                      -1, -1, -1, -1, -1, -1, -1, -1,
-                                      0, 0, 0, 0, 0, 0, 0, 0};
-
 
 }
 
@@ -52,8 +44,14 @@ std::vector<uInt> Pawn::LegalTakes(std::vector<int> pieces_positions) {
     }
 
     std::vector<uInt> moves;
-    moves.emplace_back(pos_x + 1 + ((pos_y + direction) * 8));
-    moves.emplace_back(pos_x - 1 + ((pos_y + direction) * 8));
+    if(color!=pieces_positions[pos_x + 1 + ((pos_y + direction) * 8)]){
+        moves.emplace_back(pos_x + 1 + ((pos_y + direction) * 8));
+
+    }
+    if(color!=pieces_positions[pos_x - 1 + ((pos_y + direction) * 8)]){
+        moves.emplace_back(pos_x - 1 + ((pos_y + direction) * 8));
+
+    }
 
 
     return moves;

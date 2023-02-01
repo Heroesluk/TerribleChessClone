@@ -22,7 +22,9 @@ std::vector<uInt> Knight::LegalTakes(std::vector<int> pieces_positions) {
 
     for(int i=0; i<deltax.size(); i++){
         if(pos_x+deltax[i]>=0 && pos_y+deltay[i]>=0 && pos_x+deltax[i]<=7 && pos_y+deltay[i]<=7)
-            moves.emplace_back(pos_x+deltax[i] + (8*(pos_y+deltay[i])));
+            if(color!=pieces_positions[pos_x+deltax[i]+((pos_y+deltay[i])*8)]){
+                moves.emplace_back(pos_x+deltax[i] + (8*(pos_y+deltay[i])));
+            }
     }
 
 

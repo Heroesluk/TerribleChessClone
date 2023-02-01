@@ -124,14 +124,14 @@ void Game::GameLoop() {
                 else{
                     for(auto btn: buttons){
                         if(btn.CheckIfClicked(x,y)){
-                            if(btn.button_number==1){
+                            if(btn.text_str=="Reset"){
                                 auto str = GetGameStateString("basic_input.txt");
                                 board.SetupBoardPieces(str);
                             }
-                            else if(btn.button_number==2){
+                            else if(btn.text_str=="Save"){
                                 SaveGameState();
                             }
-                            else if(btn.button_number==3){
+                            else if(btn.text_str=="Load"){
                                 auto str = GetGameStateString("save.txt");
                                 board.SetupBoardPieces(str);
                             }
