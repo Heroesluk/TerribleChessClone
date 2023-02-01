@@ -47,7 +47,7 @@ public:
     bool CheckIfLegalTake(uInt takeX, uInt takeY);
 
 
-    void SetupBoardPieces();
+    void SetupBoardPieces(std::vector<std::vector<std::string>> pieces_input);
 
     bool MakeAction(uInt board_cursorX, uInt board_cursorY, bool color_to_move);
 

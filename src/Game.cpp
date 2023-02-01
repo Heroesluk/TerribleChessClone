@@ -12,7 +12,9 @@ void Game::ClickToBoardCoords(uInt mouse_x, uInt mouse_y) {
 
 Game::Game() : window(sf::VideoMode(WIDTH+200, HEIGHT), "My window") {
 
-    board.SetupBoardPieces();
+    std::vector<std::vector<std::string>> start_data = GetGameStateString();
+
+    board.SetupBoardPieces(start_data);
     textures = LoadTextures();
 
 
@@ -122,7 +124,8 @@ void Game::GameLoop() {
                 else{
                     for(auto btn: buttons){
                         if(btn.CheckIfClicked(x,y)){
-                            LoadGameState();
+                            int x = 0;
+
 
                         }
                     }
@@ -299,18 +302,12 @@ void Game::SaveGameState() {
 
 }
 
-void Game::LoadGameState() {
+std::vector<std::vector<std::string>> Game::GetGameStateString() {
     std::ifstream f("output.txt");
-
-    int t = 0;
-
 
     std::string content( (std::istreambuf_iterator<char>(f)), (std::istreambuf_iterator<char>()));
 
-
-    std::vector<std::string> v;
     std::vector<std::vector<std::string>> v1;
-
 
     std::string descriptor;
     std::vector<std::string> piece_desc;
@@ -335,12 +332,7 @@ void Game::LoadGameState() {
             descriptor+=content[i];
         }
     }
-
-    int b = 0;
-
-    board.ResetBoard();
-
-
+    return v1;
 
 }
 
