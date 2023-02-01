@@ -12,7 +12,7 @@ void Game::ClickToBoardCoords(uInt mouse_x, uInt mouse_y) {
 
 Game::Game() : window(sf::VideoMode(WIDTH+200, HEIGHT), "My window") {
 
-    std::vector<std::vector<std::string>> start_data = GetGameStateString();
+    std::vector<std::vector<std::string>> start_data = GetGameStateString("basic_input.txt");
 
     board.SetupBoardPieces(start_data);
     textures = LoadTextures();
@@ -124,8 +124,17 @@ void Game::GameLoop() {
                 else{
                     for(auto btn: buttons){
                         if(btn.CheckIfClicked(x,y)){
-                            int x = 0;
-
+                            if(btn.button_number==1){
+                                auto str = GetGameStateString("basic_input.txt");
+                                board.SetupBoardPieces(str);
+                            }
+                            else if(btn.button_number==2){
+                                SaveGameState();
+                            }
+                            else if(btn.button_number==3){
+                                auto str = GetGameStateString("save.txt");
+                                board.SetupBoardPieces(str);
+                            }
 
                         }
                     }
@@ -265,9 +274,9 @@ void Game::DrawUI(sf::RenderWindow &Window) {
 }
 
 void Game::SetupUI() {
-    Button b1(800, 300, 100,100, "Dziala",1);
-    Button b2(800, 500, 100,100, "Drugi",2);
-    Button b3(800, 700, 100,100, "Trzeci",3);
+    Button b1(800, 300, 100,100, "Reset",1);
+    Button b2(800, 500, 100,100, "Save",2);
+    Button b3(800, 700, 100,100, "Load",3);
 
     buttons.push_back(b1);
     buttons.push_back(b2);
@@ -282,28 +291,31 @@ void Game::SaveGameState() {
     std::string temp;
 
     for(auto pc: board.ReturnAllPieces()){
-        temp.append(pc->GetPieceName());
-        temp.append("-");
-        temp.append(std::to_string(pc->GetColor()));
-        temp.append("-");
-        temp.append(std::to_string(pc->GetPosIndex()));
-        temp.append(";");
+        if(pc!= nullptr){
+            temp.append(pc->GetPieceName());
+            temp.append("-");
+            temp.append(std::to_string(pc->GetColor()));
+            temp.append("-");
+            temp.append(std::to_string(pc->GetPosIndex()));
+            temp.append(";");
+
+        }
+
 
     }
 
 
-    std::ofstream  out("output.txt");
+    std::ofstream  out("save.txt");
     out<< temp;
     out.close();
 
-    exit(5);
 
 
 
 }
 
-std::vector<std::vector<std::string>> Game::GetGameStateString() {
-    std::ifstream f("output.txt");
+std::vector<std::vector<std::string>> Game::GetGameStateString(std::string file_path) {
+    std::ifstream f(file_path);
 
     std::string content( (std::istreambuf_iterator<char>(f)), (std::istreambuf_iterator<char>()));
 

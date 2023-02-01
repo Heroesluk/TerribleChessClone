@@ -50,7 +50,7 @@ public:
     void SetupUI();
 
     void SaveGameState();
-    std::vector<std::vector<std::string>> GetGameStateString();
+    std::vector<std::vector<std::string>> GetGameStateString(std::string file_path);
 
 
 };
