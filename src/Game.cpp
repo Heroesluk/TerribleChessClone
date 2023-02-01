@@ -309,23 +309,30 @@ void Game::LoadGameState() {
 
 
     std::vector<std::string> v;
+    std::vector<std::vector<std::string>> v1;
 
-    std::string number;
+
+    std::string descriptor;
+    std::vector<std::string> piece_desc;
 
     for(int i = 0; i < content.length(); ++i)
     {
+        //Pawn-0-55
 
         if(content[i] == ';')
         {
-            if(number.size())
-            {
-                v.push_back(number);
-                number.clear();
+            piece_desc.emplace_back(descriptor);
+            descriptor.clear();
+            v1.push_back(piece_desc);
+            piece_desc.clear();
+        }
+        else if(content[i] == '-'){
+            piece_desc.emplace_back(descriptor);
+            descriptor.clear();
 
-            }
         }
         else{
-            number+=std::string(1,content[i]);
+            descriptor+=content[i];
         }
     }
 
