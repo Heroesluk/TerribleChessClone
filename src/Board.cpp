@@ -8,6 +8,9 @@
 #include "Queen.h"
 #include "Knight.h"
 #include "King.h"
+
+//pieces_input is in format of piece_name-color-piece_index
+//where piece name is string, color is either 1(white) or 0, and index is from 0 to 63
 void Board::SetupBoardPieces(std::vector<std::vector<std::string>> pieces_input) {
 
     piece_table2.clear();

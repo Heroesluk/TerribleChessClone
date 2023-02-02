@@ -84,7 +84,7 @@ void Game::Draw(const std::vector<std::shared_ptr<Piece>>& piece_map, sf::Render
     //if holding a piece, highlight all possible moves
     sf::RectangleShape pos_move(sf::Vector2f(30, 30));
     sf::RectangleShape pos_take(sf::Vector2f(30, 30));
-    pos_move.setFillColor(colors.white_piece);
+    pos_move.setFillColor(colors.pos_move);
     pos_take.setFillColor(colors.black_piece);
 
 
@@ -168,81 +168,18 @@ std::unordered_map<std::string, sf::Texture> Game::LoadTextures() {
 
     std::unordered_map<std::string,sf::Texture> textures;
 
-    sf::Texture knight;
-    if (!knight.loadFromFile("Knight.png")) {
-        exit(2);
-    }
-    sf::Texture king;
-    if (!king.loadFromFile("King.png")) {
-        std::cout << 'huj';
-        exit(2);
-    }
+    std::vector<std::string> texture_list = {"Pawn", "Knight", "Bishop", "Rook", "Queen", "King"};
 
-    sf::Texture rook;
-    if (!rook.loadFromFile("Rook.png")) {
-        exit(2);
+    for(auto tx: texture_list){
+        sf::Texture temp;
+
+        temp.loadFromFile(tx+".png");
+        textures[tx+"W"] = temp;
+        temp.loadFromFile(tx+"B.png");
+        textures[tx+"B"] = temp;
+
     }
 
-    sf::Texture queen;
-    if (!queen.loadFromFile("Queen.png")) {
-        exit(2);
-    }
-
-    sf::Texture pawn;
-    if (!pawn.loadFromFile("Pawn.png")) {
-        exit(2);
-    }
-    sf::Texture bishop;
-    if (!bishop.loadFromFile("Bishop.png")) {
-        exit(2);
-    }
-
-
-    sf::Texture knightB;
-    if (!knightB.loadFromFile("KnightB.png")) {
-        exit(2);
-    }
-    sf::Texture kingB;
-    if (!kingB.loadFromFile("KingB.png")) {
-        exit(2);
-    }
-
-    sf::Texture rookB;
-    if (!rookB.loadFromFile("RookB.png")) {
-        exit(2);
-    }
-
-    sf::Texture queenB;
-    if (!queenB.loadFromFile("QueenB.png")) {
-        exit(2);
-    }
-
-    sf::Texture pawnB;
-    if (!pawnB.loadFromFile("PawnB.png")) {
-        exit(2);
-    }
-    sf::Texture bishopB;
-    if (!bishopB.loadFromFile("BishopB.png")) {
-        exit(2);
-    }
-
-
-
-
-
-    textures["KnightW"] = knight;
-    textures["KingW"] = king;
-    textures["RookW"] = rook;
-    textures["BishopW"] = bishop;
-    textures["QueenW"] = queen;
-    textures["PawnW"] = pawn;
-
-    textures["KnightB"] = knightB;
-    textures["KingB"] = kingB;
-    textures["RookB"] = rookB;
-    textures["BishopB"] = bishopB;
-    textures["QueenB"] = queenB;
-    textures["PawnB"] = pawnB;
 
     return textures;
 
@@ -261,9 +198,6 @@ void Game::DrawUI(sf::RenderWindow &Window) {
     Window.draw(menu_back);
 
 
-
-
-
     for(auto button: buttons){
         sf::Text text = button.ReturnText();
         text.setFont(text_font);
@@ -273,11 +207,6 @@ void Game::DrawUI(sf::RenderWindow &Window) {
         Window.draw(text);
 
     }
-
-
-
-
-
 
 
 }

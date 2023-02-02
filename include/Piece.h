@@ -14,12 +14,13 @@ using uInt = unsigned int;
 class Piece {
 protected:
     std::string piece_name;
-
     bool color;
+
 
 public:
     uInt pos_x;
     uInt pos_y;
+
 
 
     Piece(uInt pos_x, uInt pos_y, bool color, std::string piece_name);

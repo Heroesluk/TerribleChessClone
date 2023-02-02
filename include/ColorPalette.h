@@ -11,7 +11,7 @@ class ColorPalette {
 public:
     sf::Color black_tile;
     sf::Color white_tile;
-    sf::Color white_piece;
+    sf::Color pos_move;
     sf::Color black_piece;
     sf::Color button_color;
     sf::Color text_color;

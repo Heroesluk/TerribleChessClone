@@ -21,3 +21,4 @@ include_directories(
 
 )
 target_link_libraries(Chess sfml-graphics sfml-audio)
+

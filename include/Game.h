@@ -19,8 +19,6 @@ using uInt = unsigned int;
 
 class Game {
 private:
-    uInt mx;
-    uInt my;
     uInt boardX;
     uInt boardY;
     ColorPalette palette;
@@ -34,23 +32,22 @@ private:
 
     int turn{0};
 
-
-public:
-    Game();
-
-    void GameLoop();
-
-
-
     std::unordered_map<std::string,sf::Texture> LoadTextures();
+    std::vector<std::vector<std::string>> GetGameStateString(std::string file_path);
+    void SetupUI();
 
     void ClickToBoardCoords(uInt mouse_x, uInt mouse_y);
     void Draw(const std::vector<std::shared_ptr<Piece>>& piece_map, sf::RenderWindow &Window);
     void DrawUI(sf::RenderWindow &Window);
-    void SetupUI();
-
     void SaveGameState();
-    std::vector<std::vector<std::string>> GetGameStateString(std::string file_path);
+
+
+public:
+    Game();
+    void GameLoop();
+
+
+
 
 
 };

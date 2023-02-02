@@ -19,15 +19,11 @@ public:
     std::string text_str;
     int button_number;
 
-
-    void on_click();
     Button(uInt posx, uInt posy, uInt sizex, uInt sizey, std::string text_str, int button_number);
-
 
     sf::Text ReturnText();
     sf::RectangleShape ReturnButton();
     int CheckIfClicked(uInt mx, uInt my);
-
 
 };
 
