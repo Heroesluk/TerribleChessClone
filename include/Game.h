@@ -33,7 +33,6 @@ private:
     int turn{0};
 
     std::unordered_map<std::string,sf::Texture> LoadTextures();
-    std::vector<std::vector<std::string>> GetGameStateString(std::string file_path);
     void SetupUI();
 
     void ClickToBoardCoords(uInt mouse_x, uInt mouse_y);
@@ -45,6 +44,8 @@ private:
 public:
     Game();
     void GameLoop();
+    std::vector<std::vector<std::string>> GetGameStateString(std::string file_path);
+
 
 
 
